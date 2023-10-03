@@ -79,7 +79,54 @@
 
             <div class="flex items-center mb-4">
                 <input checked id="checkbox-1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" >
-                <label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree to the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+                <!-- Modal toggle -->
+                <label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree to the <a href="#" data-modal-target="terms-and-conditions" data-modal-toggle="terms-and-conditions" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+                
+                <!-- Main modal -->
+                <div id="terms-and-conditions" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative w-full max-w-2xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Terms of Service
+                                </h3>
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="terms-and-conditions">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-6 space-y-6">
+                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                    Welcome to Smar'ket! We're thrilled to have you aboard. By using our services, you agree to abide by the following terms:
+                                </p>
+                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                    <b>Use of Our Services</b><br>
+                                    You may use our services for personal or business purposes, but you must comply with all applicable laws and regulations. We reserve the right to terminate access for any misuse or violation of these terms.
+                                </p>
+                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                    <b>Privacy and Personal Information</b><br>
+                                    We collect limited personal information to provide and improve our services. Rest assured, we do not sell or disclose this information to third parties without your explicit consent. For more details, please refer to our Privacy Policy.
+                                </p>
+                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                    <b>Intellectual Property and Content</b><br>
+                                    All content provided by Smar'ket, including but not limited to text, graphics, logos, and trademarks, is protected by copyright and other intellectual property laws. You may not use, reproduce, or distribute our content without prior written consent.
+Thank you for choosing Smar'ket. If you have any questions or concerns about these terms, feel free to reach out to our support team. Enjoy your experience with us!
+                                </p>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                <button data-modal-hide="terms-and-conditions" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                                <button data-modal-hide="terms-and-conditions" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+  
             </div>
 
             <button type="submit" class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-200 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-2 mb-2">Register</button>
