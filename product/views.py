@@ -35,7 +35,7 @@ def add_metric(request):
         form = AddMetricUnit(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('product:index')
+            return redirect('product:metric')
     else:
         form = AddMetricUnit()
     return render(request, 'product/form.html', {
@@ -72,3 +72,12 @@ def edit_metric(request, primary_key):
         'form': form,
     })
 
+def delete_product(primary_key):
+    product = get_object_or_404(Product, id=primary_key)
+    product.delete()
+    return redirect('product:index')
+
+def delete_metric(primary_key):
+    metric = get_object_or_404(Metric_Unit, id=primary_key)
+    metric.delete()
+    return redirect('product:metric')

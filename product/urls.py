@@ -10,4 +10,6 @@ urlpatterns = [
     path('add_metric/', views.add_metric, name='add_metric'),
     path('edit/<int:primary_key>/', views.edit_product, name='edit_product'),
     path('edit_metric/<int:primary_key>/', views.edit_metric, name='edit_metric'),
+    path('delete/<int:primary_key>/', views.delete_product, name='delete_product'),
+    path('delete_metric/<int:primary_key>/', views.delete_metric, name='delete_metric'),
 ]
