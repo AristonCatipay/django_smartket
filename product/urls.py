@@ -8,4 +8,5 @@ urlpatterns = [
     path('metric/', views.metric, name='metric'),
     path('add/', views.add_product, name='add_product'),
     path('add_metric/', views.add_metric, name='add_metric'),
+    path('<int:primary_key>/edit/', views.edit_product, name='edit_product'),
 ]
