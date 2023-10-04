@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from . forms import AddProduct, AddMetricUnit, EditProduct
+from . forms import AddProduct, AddMetricUnit, EditProduct, EditMetricUnit
 from . models import Product, Metric_Unit
 
 def index(request):
@@ -56,3 +56,19 @@ def edit_product(request, primary_key):
         'title': 'Edit Product',
         'form': form, 
     })
+
+def edit_metric(request, primary_key):
+    metric = get_object_or_404(Metric_Unit, id=primary_key)
+    if request.method == 'POST':
+        form = EditMetricUnit(request.POST, instance=metric)
+        if form.is_valid():
+            form.save()
+            return redirect('product:metric')
+    else:
+        form = EditMetricUnit(instance=metric)
+    
+    return render(request, 'product/form.html', {
+        'title': 'Edit Metric', 
+        'form': form,
+    })
+

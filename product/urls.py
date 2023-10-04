@@ -9,4 +9,5 @@ urlpatterns = [
     path('add/', views.add_product, name='add_product'),
     path('add_metric/', views.add_metric, name='add_metric'),
     path('edit/<int:primary_key>/', views.edit_product, name='edit_product'),
+    path('edit_metric/<int:primary_key>/', views.edit_metric, name='edit_metric'),
 ]

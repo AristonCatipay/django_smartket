@@ -70,3 +70,13 @@ class EditProduct(forms.ModelForm):
                 'class': INPUT_CLASSES
             }),
         }
+
+class EditMetricUnit(forms.ModelForm):
+    class Meta:
+        model = Metric_Unit
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+        }
