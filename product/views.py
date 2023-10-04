@@ -25,7 +25,7 @@ def add_product(request):
             return redirect('product:index')
     else:
         form = AddProduct()
-    return render(request, 'product/add_product.html', {
+    return render(request, 'product/form.html', {
         'title': 'Add Product', 
         'form': form
     })
@@ -38,7 +38,7 @@ def add_metric(request):
             return redirect('product:index')
     else:
         form = AddMetricUnit()
-    return render(request, 'product/add_metric_unit.html', {
+    return render(request, 'product/form.html', {
         'title': 'Add Metric',
         'form': form,
     })
@@ -52,7 +52,7 @@ def edit_product(request, primary_key):
             return redirect('product:index')
     else:
         form = EditProduct(instance=product)
-    return render(request, 'product/edit_product.html', {
+    return render(request, 'product/form.html', {
         'title': 'Edit Product',
         'form': form, 
     })
