@@ -1,12 +1,19 @@
 from django.shortcuts import render, redirect
 from . forms import AddProduct, AddMetricUnit
-from . models import Product
+from . models import Product, Metric_Unit
 
 def index(request):
     products = Product.objects.all()
     return render(request, 'product/index.html', {
         'title': 'Product',
         'products': products,
+    })
+
+def metric(request):
+    metric_units = Metric_Unit.objects.all()
+    return render(request, 'product/index_metric_unit.html', {
+        'title': 'Metric',
+        'metric_units': metric_units,
     })
 
 def add_product(request):
