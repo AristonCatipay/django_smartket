@@ -37,3 +37,8 @@ def edit_customer_number(request, primary_key):
         'title': 'Edit Number',
         'form': form,
     })
+
+def delete_customer_number(request ,primary_key):
+    customer_number = get_object_or_404(Number, id=primary_key)
+    customer_number.delete()
+    return redirect('number:index')
