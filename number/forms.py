@@ -21,3 +21,23 @@ class AddCustomerNumber(forms.ModelForm):
                 'class': INPUT_CLASSES,
             })
         }
+
+
+class EditCustomerNumber(forms.ModelForm):
+    class Meta:
+        model = Number
+        fields = ('name', 'number', 'network', 'load')
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES,
+            }),
+            'number': forms.TextInput(attrs={
+                'class': INPUT_CLASSES,
+            }),
+            'network': forms.Select(attrs={
+                'class': INPUT_CLASSES,
+            }),
+            'load': forms.TextInput(attrs={
+                'class': INPUT_CLASSES,
+            })
+        }

@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from . forms import AddCustomerNumber
+from django.shortcuts import render, redirect, get_object_or_404
+from . forms import AddCustomerNumber, EditCustomerNumber
 from . models import Number
 
 def index(request):
@@ -20,5 +20,20 @@ def add_customer_number(request):
         form = AddCustomerNumber()
     return render(request, 'number/form.html', {
         'title': 'Add Customer Number',
+        'form': form,
+    })
+
+def edit_customer_number(request, primary_key):
+    number_id = get_object_or_404(Number, id=primary_key)
+    if request.method == 'POST':
+        form = EditCustomerNumber(request.POST, instance=number_id)
+
+        if form.is_valid():
+            form.save()
+            return redirect('number:index')
+    else:
+        form = EditCustomerNumber(instance=number_id)
+    return render(request, 'number/form.html', {
+        'title': 'Edit Number',
         'form': form,
     })
