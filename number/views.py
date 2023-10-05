@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from . forms import AddCustomerNumber
+from . models import Number
 
 def index(request):
+    customer_numbers = Number.objects.all()
     return render(request, 'number/index.html', {
-        'title': 'Customer Number'
+        'title': 'Customer Number',
+        'customer_numbers': customer_numbers
     })
 
 def add_customer_number(request):
