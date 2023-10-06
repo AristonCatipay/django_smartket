@@ -32,16 +32,6 @@ class AddProduct(forms.ModelForm):
             }),
         }
 
-class AddMetricUnit(forms.ModelForm):
-    class Meta:
-        model = Metric_Unit
-        fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
-            }),
-        }
-
 class EditProduct(forms.ModelForm):
     class Meta:
         model = Product
@@ -67,6 +57,45 @@ class EditProduct(forms.ModelForm):
                 'class': INPUT_CLASSES
             }),
             'product_size': forms.Select(attrs={
+                'class': INPUT_CLASSES
+            }),
+        }
+
+class DeleteProduct(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('product_name', 'product_price', 'metric_number', 'metric_unit', 
+                  'product_color', 'product_section', 'product_size')
+        widgets = {
+            'product_name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'product_price': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'metric_number': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'metric_unit': forms.Select(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'product_color': forms.Select(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'product_section': forms.Select(attrs={
+                'class': INPUT_CLASSES
+            }),
+            'product_size': forms.Select(attrs={
+                'class': INPUT_CLASSES
+            }),
+        }
+
+class AddMetricUnit(forms.ModelForm):
+    class Meta:
+        model = Metric_Unit
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={
                 'class': INPUT_CLASSES
             }),
         }
