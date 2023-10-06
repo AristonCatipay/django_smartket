@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from . forms import AddCustomerNumber, EditCustomerNumber
+from . forms import CustomerNumberForm
 from . models import Number
 
 def index(request):
@@ -11,13 +11,13 @@ def index(request):
 
 def add_customer_number(request):
     if request.method == 'POST':
-        form = AddCustomerNumber(request.POST)
+        form = CustomerNumberForm(request.POST)
 
         if form.is_valid():
             form.save()
             return redirect('number:index')
     else:
-        form = AddCustomerNumber()
+        form = CustomerNumberForm()
     return render(request, 'number/form.html', {
         'title': 'Add Customer Number',
         'form': form,
@@ -26,13 +26,13 @@ def add_customer_number(request):
 def edit_customer_number(request, primary_key):
     number_id = get_object_or_404(Number, id=primary_key)
     if request.method == 'POST':
-        form = EditCustomerNumber(request.POST, instance=number_id)
+        form = CustomerNumberForm(request.POST, instance=number_id)
 
         if form.is_valid():
             form.save()
             return redirect('number:index')
     else:
-        form = EditCustomerNumber(instance=number_id)
+        form = CustomerNumberForm(instance=number_id)
     return render(request, 'number/form.html', {
         'title': 'Edit Number',
         'form': form,
@@ -42,10 +42,10 @@ def delete_customer_number(request ,primary_key):
     is_delete = True
     customer_number = get_object_or_404(Number, id=primary_key)
     if request.method == 'POST':
-        form = AddCustomerNumber(request.POST, instance=customer_number)
+        form = CustomerNumberForm(request.POST, instance=customer_number)
         customer_number.delete()
     else: 
-        form = AddCustomerNumber(instance=customer_number)
+        form = CustomerNumberForm(instance=customer_number)
     return render(request, 'number/form.html', {
         'title': 'Delete Number',
         'form': form,
