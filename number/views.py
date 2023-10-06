@@ -39,6 +39,15 @@ def edit_customer_number(request, primary_key):
     })
 
 def delete_customer_number(request ,primary_key):
+    is_delete = True
     customer_number = get_object_or_404(Number, id=primary_key)
-    customer_number.delete()
-    return redirect('number:index')
+    if request.method == 'POST':
+        form = AddCustomerNumber(request.POST, instance=customer_number)
+        customer_number.delete()
+    else: 
+        form = AddCustomerNumber(instance=customer_number)
+    return render(request, 'number/form.html', {
+        'title': 'Delete Number',
+        'form': form,
+        'is_delete': is_delete,
+    })
