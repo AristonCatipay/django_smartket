@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from . forms import AddProduct, AddMetricUnit, EditProduct, EditMetricUnit, DeleteProduct
+from . forms import AddProduct, AddMetricUnit, EditProduct, EditMetricUnit, DeleteProduct, DeleteMetricUnit
 from . models import Product, Metric_Unit
 
 def index(request):
@@ -73,6 +73,7 @@ def edit_metric(request, primary_key):
     })
 
 def delete_product(request, primary_key):
+    model = 'Product'
     is_delete = True
     product = get_object_or_404(Product, id=primary_key)
     if request.method == 'POST':
@@ -85,9 +86,22 @@ def delete_product(request, primary_key):
         'title': 'Delete Product',
         'form': form,
         'is_delete': is_delete,
+        'model': model,
     })
 
-def delete_metric(primary_key):
+def delete_metric(request, primary_key):
+    model = 'Metric Unit'
+    is_delete = True
     metric = get_object_or_404(Metric_Unit, id=primary_key)
-    metric.delete()
-    return redirect('product:metric')
+    if request.method == 'POST':
+        form = DeleteMetricUnit(request.POST, instance=metric)
+        metric.delete()
+        return redirect('product:metric')
+    else:
+        form = DeleteMetricUnit(instance=metric)
+    return render(request ,'product/form.html', {
+        'title': 'Delete Product',
+        'form': form,
+        'is_delete': is_delete,
+        'model': model,
+    })

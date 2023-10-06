@@ -109,3 +109,13 @@ class EditMetricUnit(forms.ModelForm):
                 'class': INPUT_CLASSES
             }),
         }
+
+class DeleteMetricUnit(forms.ModelForm):
+    class Meta:
+        model = Metric_Unit
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+        }
