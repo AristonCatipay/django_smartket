@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from . forms import ProductForm, AddMetricUnit, EditMetricUnit, DeleteMetricUnit
+from . forms import ProductForm, MetricUnitForm
 from . models import Product, Metric_Unit
 
 def index(request):
@@ -63,12 +63,12 @@ def metric(request):
 
 def add_metric(request):
     if request.method == 'POST':
-        form = AddMetricUnit(request.POST)
+        form = MetricUnitForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('product:metric')
     else:
-        form = AddMetricUnit()
+        form = MetricUnitForm()
     return render(request, 'product/form.html', {
         'title': 'Add Metric',
         'form': form,
@@ -78,12 +78,12 @@ def add_metric(request):
 def edit_metric(request, primary_key):
     metric = get_object_or_404(Metric_Unit, id=primary_key)
     if request.method == 'POST':
-        form = EditMetricUnit(request.POST, instance=metric)
+        form = MetricUnitForm(request.POST, instance=metric)
         if form.is_valid():
             form.save()
             return redirect('product:metric')
     else:
-        form = EditMetricUnit(instance=metric)
+        form = MetricUnitForm(instance=metric)
     
     return render(request, 'product/form.html', {
         'title': 'Edit Metric', 
@@ -96,11 +96,11 @@ def delete_metric(request, primary_key):
     is_delete = True
     metric = get_object_or_404(Metric_Unit, id=primary_key)
     if request.method == 'POST':
-        form = DeleteMetricUnit(request.POST, instance=metric)
+        form = MetricUnitForm(request.POST, instance=metric)
         metric.delete()
         return redirect('product:metric')
     else:
-        form = DeleteMetricUnit(instance=metric)
+        form = MetricUnitForm(instance=metric)
     return render(request ,'product/form.html', {
         'title': 'Delete Product',
         'form': form,

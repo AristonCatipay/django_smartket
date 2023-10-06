@@ -32,27 +32,7 @@ class ProductForm(forms.ModelForm):
             }),
         }
 
-class AddMetricUnit(forms.ModelForm):
-    class Meta:
-        model = Metric_Unit
-        fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
-            }),
-        }
-
-class EditMetricUnit(forms.ModelForm):
-    class Meta:
-        model = Metric_Unit
-        fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
-            }),
-        }
-
-class DeleteMetricUnit(forms.ModelForm):
+class MetricUnitForm(forms.ModelForm):
     class Meta:
         model = Metric_Unit
         fields = ['name']
