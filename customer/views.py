@@ -38,3 +38,18 @@ def edit_customer(request, primary_key):
         'title': 'Edit Customer',
         'form': form,
     })
+
+def delete_customer(request, primary_key):
+    is_delete = True
+    customer = get_object_or_404(Customer, id=primary_key)
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, instance=customer)
+        customer.delete()
+        return redirect('customer:index')
+    else:
+        form = CustomerForm(instance=customer)
+    return render(request, 'customer/form.html', {
+        'title': 'Delete Customer',
+        'form': form,
+        'is_delete': is_delete,
+    })
