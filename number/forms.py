@@ -6,9 +6,9 @@ INPUT_CLASSES = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded
 class CustomerNumberForm(forms.ModelForm):
     class Meta:
         model = Number
-        fields = ('name', 'number', 'network', 'load')
+        fields = ('customer', 'number', 'network', 'load')
         widgets = {
-            'name': forms.TextInput(attrs={
+            'customer': forms.Select(attrs={
                 'class': INPUT_CLASSES,
             }),
             'number': forms.TextInput(attrs={

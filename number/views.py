@@ -44,6 +44,7 @@ def delete_customer_number(request ,primary_key):
     if request.method == 'POST':
         form = CustomerNumberForm(request.POST, instance=customer_number)
         customer_number.delete()
+        return redirect('number:index')
     else: 
         form = CustomerNumberForm(instance=customer_number)
     return render(request, 'number/form.html', {

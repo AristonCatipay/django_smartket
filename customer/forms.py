@@ -7,7 +7,7 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ('first_name', 'last_name', 'username', 'age', 
-                  'gender', 'email', 'contact_no', 'civil_status', 
+                  'gender', 'email', 'civil_status', 
                   'street', 'barangay', 'city', 'birth_date')
         widgets = {
             'first_name': forms.TextInput(attrs={
@@ -26,9 +26,6 @@ class CustomerForm(forms.ModelForm):
                 'class': INPUT_CLASSES
             }),
             'email': forms.EmailInput(attrs={
-                'class': INPUT_CLASSES
-            }),
-            'contact_no': forms.TextInput(attrs={
                 'class': INPUT_CLASSES
             }),
             'civil_status': forms.Select(attrs={

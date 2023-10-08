@@ -1,4 +1,5 @@
 from django.db import models
+from customer.models import Customer
 
 class Number(models.Model):
     GLOBE = 'GLOBE'
@@ -21,7 +22,7 @@ class Number(models.Model):
         (DEFAULT, 'Not Specified')
     ]
 
-    name = models.CharField(max_length=150)
+    customer = models.ForeignKey(Customer, related_name='customer_id',on_delete=models.CASCADE)
     number = models.CharField(max_length=150, unique=True)
     network = models.CharField(max_length=25, choices=NETWORK_CHOICES, default=DEFAULT)
     load = models.CharField(max_length=150)
