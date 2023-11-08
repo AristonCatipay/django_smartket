@@ -1,20 +1,16 @@
     <!-- This will be the base file for all the html files. -->
-
+    {% load static tailwind_tags %}
     <!DOCTYPE html>
     <html lang="en">
     <!-- <head> -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <!-- Importing Tailwind -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <!-- Importing font awesome -->
-        <script src="https://kit.fontawesome.com/9fc08e307b.js" crossorigin="anonymous"></script>
         <!-- Importing Flowbite -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
         <title>{% block title %}{% endblock %} | Smar'ket</title>
+        {% tailwind_css %}
     </head>
-    <body>  
+    <body class="bg-white dark:bg-gray-900">  
         <nav class="py-6 px-6 grid grid-flow-col justify-stretch bg-white dark:bg-gray-900 border-b-2 border-b-gray-500">
             <div>
                 <a href="/" class="min-w-max text-2xl font-bold whitespace-nowrap dark:text-white">Smar'ket</a>
