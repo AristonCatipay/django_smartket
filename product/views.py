@@ -237,3 +237,18 @@ def add_size(request):
         'title': 'Add Size',
         'form': form,
     })
+
+def edit_size(request, size_primary_key):
+    size = get_object_or_404(Size, id=size_primary_key)
+    if request.method == 'POST':
+        form = SizeForm(request.POST, instance=size)
+        if form.is_valid():
+            form.save()
+            return redirect('product:size')
+    else:
+        form = SizeForm(instance=size)
+    
+    return render(request, 'product/form.html', {
+        'title': 'Edit Size', 
+        'form': form,
+    })
