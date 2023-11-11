@@ -133,3 +133,18 @@ def add_category(request):
         'title': 'Add Category',
         'form': form,
     })
+
+def edit_category(request, category_primary_key):
+    category = get_object_or_404(Category, id=category_primary_key)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('product:category')
+    else:
+        form = CategoryForm(instance=category)
+    
+    return render(request, 'product/form.html', {
+        'title': 'Edit Category', 
+        'form': form,
+    })
