@@ -200,3 +200,20 @@ def edit_color(request, color_primary_key):
         'title': 'Edit Color', 
         'form': form,
     })
+
+def delete_color(request, color_primary_key):
+    model = 'Color'
+    is_delete = True
+    color = get_object_or_404(Color, id=color_primary_key)
+    if request.method == 'POST':
+        form = ColorForm(request.POST, instance=color)
+        color.delete()
+        return redirect('product:color')
+    else:
+        form = ColorForm(instance=color)
+    return render(request ,'product/form.html', {
+        'title': 'Delete Color',
+        'form': form,
+        'is_delete': is_delete,
+        'model': model,
+    })
