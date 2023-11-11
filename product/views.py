@@ -224,3 +224,16 @@ def size(request):
         'title': 'sizes',
         'sizes': sizes,
     })
+
+def add_size(request):
+    if request.method == 'POST':
+        form = SizeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product:size')
+    else:
+        form = SizeForm()
+    return render(request, 'product/form.html', {
+        'title': 'Add Size',
+        'form': form,
+    })
