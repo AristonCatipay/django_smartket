@@ -3,10 +3,16 @@ from . forms import ProductForm, MetricUnitForm
 from . models import Product, Metric_Unit
 
 def index(request):
+    query = request.GET.get('query', '')
     products = Product.objects.all()
+
+    if query:
+        products = products.filter(product_name__icontains=query)
+
     return render(request, 'product/index.html', {
         'title': 'Product',
         'products': products,
+        'query': query,
     })
 
 def add_product(request):
