@@ -62,7 +62,7 @@ def delete_product(request, primary_key):
 
 def metric(request):
     metric_units = Metric_Unit.objects.all()
-    return render(request, 'product/index_metric_unit.html', {
+    return render(request, 'product/metric_unit.html', {
         'title': 'Metric',
         'metric_units': metric_units,
     })
@@ -116,7 +116,7 @@ def delete_metric(request, primary_key):
 
 def category(request):
     categories = Category.objects.all()
-    return render(request, 'product/index_category.html', {
+    return render(request, 'product/category.html', {
         'title': 'Category',
         'categories': categories,
     })
@@ -164,4 +164,11 @@ def delete_category(request, category_primary_key):
         'form': form,
         'is_delete': is_delete,
         'model': model,
+    })
+
+def color(request):
+    colors = Color.objects.all()
+    return render(request, 'product/color.html', {
+        'title': 'Colors',
+        'colors': colors,
     })
