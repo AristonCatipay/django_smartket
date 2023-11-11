@@ -7,7 +7,7 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ('product_name', 'product_price', 'metric_number', 'metric_unit', 
-                  'product_color', 'product_section', 'product_size')
+                  'product_color', 'product_category', 'product_size')
         widgets = {
             'product_name': forms.TextInput(attrs={
                 'class': INPUT_CLASSES
@@ -24,7 +24,7 @@ class ProductForm(forms.ModelForm):
             'product_color': forms.Select(attrs={
                 'class': INPUT_CLASSES
             }),
-            'product_section': forms.Select(attrs={
+            'product_category': forms.Select(attrs={
                 'class': INPUT_CLASSES
             }),
             'product_size': forms.Select(attrs={
