@@ -148,3 +148,20 @@ def edit_category(request, category_primary_key):
         'title': 'Edit Category', 
         'form': form,
     })
+
+def delete_category(request, category_primary_key):
+    model = 'Category'
+    is_delete = True
+    category = get_object_or_404(Category, id=category_primary_key)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        category.delete()
+        return redirect('product:category')
+    else:
+        form = CategoryForm(instance=category)
+    return render(request ,'product/form.html', {
+        'title': 'Delete Category',
+        'form': form,
+        'is_delete': is_delete,
+        'model': model,
+    })
