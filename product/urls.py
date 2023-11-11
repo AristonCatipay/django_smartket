@@ -23,4 +23,5 @@ urlpatterns = [
     path('size/', views.size, name='size'),
     path('size/add/', views.add_size, name='add_size'),
     path('size/edit/<int:size_primary_key>/', views.edit_size, name='edit_size'),
+    path('size/delete/<int:size_primary_key>/', views.delete_size, name='delete_size'),
 ]

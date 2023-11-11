@@ -252,3 +252,20 @@ def edit_size(request, size_primary_key):
         'title': 'Edit Size', 
         'form': form,
     })
+
+def delete_size(request, size_primary_key):
+    model = 'Size'
+    is_delete = True
+    size = get_object_or_404(Size, id=size_primary_key)
+    if request.method == 'POST':
+        form = SizeForm(request.POST, instance=size)
+        size.delete()
+        return redirect('product:size')
+    else:
+        form = SizeForm(instance=size)
+    return render(request ,'product/form.html', {
+        'title': 'Delete Size',
+        'form': form,
+        'is_delete': is_delete,
+        'model': model,
+    })
