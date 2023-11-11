@@ -172,3 +172,16 @@ def color(request):
         'title': 'Colors',
         'colors': colors,
     })
+
+def add_color(request):
+    if request.method == 'POST':
+        form = ColorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product:color')
+    else:
+        form = ColorForm()
+    return render(request, 'product/form.html', {
+        'title': 'Add Color',
+        'form': form,
+    })
