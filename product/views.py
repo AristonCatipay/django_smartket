@@ -120,3 +120,16 @@ def category(request):
         'title': 'Category',
         'categories': categories,
     })
+
+def add_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product:category')
+    else:
+        form = CategoryForm()
+    return render(request, 'product/form.html', {
+        'title': 'Add Category',
+        'form': form,
+    })

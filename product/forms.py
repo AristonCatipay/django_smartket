@@ -1,5 +1,5 @@
 from django import forms
-from . models import Product, Metric_Unit
+from . models import Product, Metric_Unit, Category, Color, Size
 
 INPUT_CLASSES = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 
@@ -44,7 +44,7 @@ class MetricUnitForm(forms.ModelForm):
     
 class CategoryForm(forms.ModelForm):
     class Meta:
-        model = Metric_Unit
+        model = Category
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs={
@@ -54,7 +54,7 @@ class CategoryForm(forms.ModelForm):
 
 class ColorForm(forms.ModelForm):
     class Meta:
-        model = Metric_Unit
+        model = Color
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs={
@@ -64,7 +64,7 @@ class ColorForm(forms.ModelForm):
 
 class SizeForm(forms.ModelForm):
     class Meta:
-        model = Metric_Unit
+        model = Size
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs={
