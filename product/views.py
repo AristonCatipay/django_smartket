@@ -185,3 +185,18 @@ def add_color(request):
         'title': 'Add Color',
         'form': form,
     })
+
+def edit_color(request, color_primary_key):
+    color = get_object_or_404(Color, id=color_primary_key)
+    if request.method == 'POST':
+        form = ColorForm(request.POST, instance=color)
+        if form.is_valid():
+            form.save()
+            return redirect('product:color')
+    else:
+        form = ColorForm(instance=color)
+    
+    return render(request, 'product/form.html', {
+        'title': 'Edit Color', 
+        'form': form,
+    })

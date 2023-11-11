@@ -18,4 +18,5 @@ urlpatterns = [
     path('category/delete/<int:category_primary_key>/', views.delete_category, name='delete_category'),
     path('color/', views.color, name='color'),
     path('color/add/', views.add_color, name='add_color'),
+    path('color/edit/<int:color_primary_key>/', views.edit_color, name='edit_color'),
 ]
