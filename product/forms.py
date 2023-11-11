@@ -41,3 +41,33 @@ class MetricUnitForm(forms.ModelForm):
                 'class': INPUT_CLASSES
             }),
         }
+    
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Metric_Unit
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+        }
+
+class ColorForm(forms.ModelForm):
+    class Meta:
+        model = Metric_Unit
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+        }
+
+class SizeForm(forms.ModelForm):
+    class Meta:
+        model = Metric_Unit
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+        }
