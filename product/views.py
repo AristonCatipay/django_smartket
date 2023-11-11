@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from . forms import ProductForm, MetricUnitForm
-from . models import Product, Metric_Unit
+from . forms import ProductForm, MetricUnitForm, CategoryForm, ColorForm, SizeForm
+from . models import Product, Metric_Unit, Category, Color, Size
 
 def index(request):
     query = request.GET.get('query', '')
@@ -112,4 +112,11 @@ def delete_metric(request, primary_key):
         'form': form,
         'is_delete': is_delete,
         'model': model,
+    })
+
+def category(request):
+    categories = Category.objects.all()
+    return render(request, 'product/index_category.html', {
+        'title': 'Category',
+        'categories': categories,
     })
