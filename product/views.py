@@ -29,8 +29,8 @@ def add_product(request):
         'form': form
     })
 
-def edit_product(request, primary_key):
-    product = get_object_or_404(Product, id=primary_key)
+def edit_product(request, product_primary_key):
+    product = get_object_or_404(Product, id=product_primary_key)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
@@ -43,10 +43,10 @@ def edit_product(request, primary_key):
         'form': form, 
     })
 
-def delete_product(request, primary_key):
+def delete_product(request, product_primary_key):
     model = 'Product'
     is_delete = True
-    product = get_object_or_404(Product, id=primary_key)
+    product = get_object_or_404(Product, id=product_primary_key)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
         product.delete()
@@ -81,8 +81,8 @@ def add_metric(request):
     })
 
 
-def edit_metric(request, primary_key):
-    metric = get_object_or_404(Metric_Unit, id=primary_key)
+def edit_metric(request, metric_primary_key):
+    metric = get_object_or_404(Metric_Unit, id=metric_primary_key)
     if request.method == 'POST':
         form = MetricUnitForm(request.POST, instance=metric)
         if form.is_valid():
@@ -97,10 +97,10 @@ def edit_metric(request, primary_key):
     })
 
 
-def delete_metric(request, primary_key):
+def delete_metric(request, metric_primary_key):
     model = 'Metric Unit'
     is_delete = True
-    metric = get_object_or_404(Metric_Unit, id=primary_key)
+    metric = get_object_or_404(Metric_Unit, id=metric_primary_key)
     if request.method == 'POST':
         form = MetricUnitForm(request.POST, instance=metric)
         metric.delete()
