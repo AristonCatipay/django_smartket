@@ -1,3 +1,4 @@
+![Smar'ket](/readme_images/smartket_desktop.png)
 # Smar'ket - a Website for Managing Sari-Sari Store
 
 Smar'ket is a Django website that is used to manage sari-sari stores. The name is derived from the combination of "smart" and "market". The goal of this application is to keep track of all the product information and transactions that happens in the sari-sari store.
@@ -29,6 +30,16 @@ pipenv install django
 Install MySQL Client
 ```bash
 pipenv install mysqlclient
+```
+
+Install Tailwind
+```bash
+pipenv install django-tailwind
+```
+
+Install Django Tailwind Reload
+```bash
+pipenv install django-tailwind[reload]
 ```
 
 Create a database named 'django_smartket' 
