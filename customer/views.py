@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from . forms import CustomerForm
 from . models import Customer
 
 # Create your views here.
 
 def index(request):
+    query = request.GET.get('query', '')
     customers = Customer.objects.all()
+
+    if query:
+        customers = customers.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
+
     return render(request, 'customer/index.html', {
         'title': 'Customer',
         'customers': customers,
