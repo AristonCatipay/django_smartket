@@ -4,15 +4,22 @@ from . models import Product, Metric_Unit, Category, Color, Size
 
 def index(request):
     query = request.GET.get('query', '')
+    category_id = request.GET.get('category', 0)
+    categories = Category.objects.all()
     products = Product.objects.all()
-
+    
     if query:
         products = products.filter(product_name__icontains=query)
+    
+    if category_id:
+        products = products.filter(product_category = category_id)
 
     return render(request, 'product/index.html', {
         'title': 'Product',
         'products': products,
         'query': query,
+        'categories': categories,
+        'category_id': int(category_id),
     })
 
 def add_product(request):
