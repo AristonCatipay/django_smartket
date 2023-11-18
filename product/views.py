@@ -228,7 +228,7 @@ def delete_color(request, color_primary_key):
 def size(request):
     sizes = Size.objects.all()
     return render(request, 'product/size.html', {
-        'title': 'sizes',
+        'title': 'Sizes',
         'sizes': sizes,
     })
 
