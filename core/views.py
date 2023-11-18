@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from .decorators import unauthenticated_user
 
+@unauthenticated_user
 def home(request):
     return render(request, 'core/home.html', {
         'title': 'Home',
@@ -12,6 +14,7 @@ def index(request):
         'title': 'Welcome',
     })
 
+@unauthenticated_user
 def signup(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -45,7 +48,7 @@ def signup(request):
             'title': 'Signup',
         })
 
-
+@unauthenticated_user
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
