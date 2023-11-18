@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'number',
     'credit',
     'customer',
+    'user_profile',
 ]
 
 MIDDLEWARE = [
