@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from . forms import CustomerNumberForm
 from . models import Number
 
 def index(request):
+    query = request.GET.get('query', '')
     customer_numbers = Number.objects.all()
+
+    if query:
+        customer_numbers = customer_numbers.filter(number__icontains=query)
     return render(request, 'number/index.html', {
         'title': 'Customer Number',
         'customer_numbers': customer_numbers
