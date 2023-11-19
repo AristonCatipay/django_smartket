@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+<div class="flex justify-center">
+    <div class="w-full max-w-md p-6 md:px-10 md:py-10 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div class="flex justify-end px-4">
+            <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                <span class="sr-only">Open dropdown</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2" aria-labelledby="dropdownButton">
+                    <li>
+                        <a href="{% url 'profile:edit' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'profile:change_password' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Change Password</a>
+                    </li>
+                </ul>
+            </div>
+        </div>        
+        <div class="p-3">
+            <div class="flex items-center justify-between mb-2">
+                <a href="#">
+                    <img class="w-24 h-24 rounded-full" src="{{ user.profile.image.url }}" alt="Jese Leos">
+                </a>
+            </div>
+            <p class="text-base font-semibold leading-none text-gray-900 dark:text-white">
+                <a href="#">{{ user.first_name }} {{ user.last_name }}</a>
+            </p>
+            <p class="mb-3 text-sm font-normal dark:text-white">
+                <a href="#" class="hover:underline">@{{ user.username }}</a>
+            </p>
+            <div class="flex flex-row">
+                <svg class="w-4 h-4 mt-0.5 mr-1 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 2-8.4 7.05a1 1 0 0 1-1.2 0L1 2m18 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1m18 0v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2"/>
+                </svg>
+                <p class="mb-4 text-sm dark:text-white">{{ user.email }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
