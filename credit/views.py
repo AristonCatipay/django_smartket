@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Credit_Transaction, Credit_Transaction_Item
-from .forms import CreditTransactionForm
+from .forms import CreditTransactionForm, CreditTransactionItemForm
+from product.models import Product
 
 def index(request):
     credit_transactions = Credit_Transaction.objects.all()
@@ -30,6 +31,32 @@ def credit_product(request, credit_transaction_primary_key):
     return render(request, 'credit/credit_product.html', {
         'title': 'Credit',
         'credit_products': credit_products,
+        'credit_transaction_primary_key': credit_transaction_primary_key,
+    })
+
+def add_credit_product(request, credit_transaction_primary_key):
+    if request.method == 'POST':
+        form = CreditTransactionItemForm(request.POST)
+        if form.is_valid():
+            credit_product = form.save(commit=False)
+
+            # Fetch the product from the form data
+            product = form.cleaned_data['product']
+
+            product = Product.objects.get(pk=product.id)
+            credit_transaction = Credit_Transaction.objects.get(pk=credit_transaction_primary_key)
+
+            credit_product.credit_transaction = credit_transaction
+            credit_product.product = product
+            credit_product.product_current_price = product.product_price
+
+            credit_product.save()
+            return redirect('credit:credit_product', credit_transaction_primary_key)
+    else:
+        form = CreditTransactionItemForm()
+    return render(request, 'credit/form.html', {
+        'title': 'Add Credit Product',
+        'form': form,
     })
 
 

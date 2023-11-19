@@ -91,5 +91,7 @@ class Product(models.Model):
     product_color = models.ForeignKey(Color, related_name='color_id', on_delete=models.CASCADE)
     product_size = models.ForeignKey(Size, related_name='size_id', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.product_name
 
 
