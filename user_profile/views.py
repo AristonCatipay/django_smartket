@@ -37,3 +37,22 @@ def edit(request):
     return render(request, 'user_profile/edit.html', {
         'title': 'Edit Profile',
     })
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        new_password = request.POST['new_password'] 
+        confirm_new_password = request.POST['confirm_new_password'] 
+
+        if new_password == confirm_new_password:
+            request.user.set_password(new_password)
+            request.user.save()
+            messages.info(request, 'Successful')
+            return redirect('core:signin')
+        else:
+            messages.info(request, 'Password don\'t match')
+            return redirect('profile:change_password')
+            
+    return render(request, 'user_profile/change_password.html', {
+        'title': 'Change Password',
+    })
