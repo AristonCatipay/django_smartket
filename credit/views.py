@@ -25,6 +25,13 @@ def add_credit_transaction(request):
         'form' : form,
     })
 
+def credit_product(request, credit_transaction_primary_key):
+    credit_products = Credit_Transaction_Item.objects.filter(credit_transaction=credit_transaction_primary_key)
+    return render(request, 'credit/credit_product.html', {
+        'title': 'Credit',
+        'credit_products': credit_products,
+    })
+
 
 
 
