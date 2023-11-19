@@ -22,3 +22,4 @@ class Credit_Transaction(models.Model):
 class Credit_Transaction_Item(models.Model):
     credit_transaction = models.ForeignKey(Credit_Transaction, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_current_price = models.IntegerField()
