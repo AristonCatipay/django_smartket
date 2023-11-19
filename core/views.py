@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .decorators import unauthenticated_user
+from user_profile.models import Profile
 
 @unauthenticated_user
 def home(request):
@@ -36,8 +37,12 @@ def signup(request):
                 user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
                 user.save()
                 # Log the user using the credentials.
-                user_credentials = auth.authenticate(username=username, password=password)
-                auth.login(request, user_credentials)
+                credentials = auth.authenticate(username=username, password=password)
+                auth.login(request, credentials)
+                # Create user profile.
+                user = User.objects.get(username=username)
+                profile = Profile.objects.create(user=user)
+                profile.save()
 
                 return redirect('core:index')
         else: 
