@@ -1,10 +1,11 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from product.models import Product
 from .models import Credit_Transaction, Credit_Transaction_Item
 from .forms import CreditTransactionForm, CreditTransactionItemForm
-from product.models import Product
 
+@login_required
 def index(request):
     query = request.GET.get('query', '')
     credit_transactions = Credit_Transaction.objects.all()
@@ -16,6 +17,7 @@ def index(request):
         'credit_transactions': credit_transactions,
     })
 
+@login_required
 def add_credit_transaction(request):
     if request.method == 'POST':
         form = CreditTransactionForm(request.POST)
@@ -31,6 +33,7 @@ def add_credit_transaction(request):
         'form' : form,
     })
 
+@login_required
 def edit_credit_transaction(request, credit_transaction_primary_key):
     credit_transaction = get_object_or_404(Credit_Transaction, pk=credit_transaction_primary_key)
     if request.method == 'POST':
@@ -45,6 +48,7 @@ def edit_credit_transaction(request, credit_transaction_primary_key):
         'form' : form,
     })
 
+@login_required
 def mark_transaction_as_paid(request, credit_transaction_primary_key):
     credit_transaction = get_object_or_404(Credit_Transaction, pk=credit_transaction_primary_key)
     
@@ -54,6 +58,7 @@ def mark_transaction_as_paid(request, credit_transaction_primary_key):
     
     return redirect('credit:index')
 
+@login_required
 def credit_product(request, credit_transaction_primary_key):
     credit_products = Credit_Transaction_Item.objects.filter(credit_transaction=credit_transaction_primary_key)
     return render(request, 'credit/credit_product.html', {
@@ -62,6 +67,7 @@ def credit_product(request, credit_transaction_primary_key):
         'credit_transaction_primary_key': credit_transaction_primary_key,
     })
 
+@login_required
 def add_credit_product(request, credit_transaction_primary_key):
     if request.method == 'POST':
         form = CreditTransactionItemForm(request.POST)
@@ -87,6 +93,7 @@ def add_credit_product(request, credit_transaction_primary_key):
         'form': form,
     })
 
+@login_required
 def edit_credit_product(request, credit_product_primary_key, credit_transaction_primary_key):
     credit_product = get_object_or_404(Credit_Transaction_Item, pk=credit_product_primary_key)
     if request.method == 'POST':
@@ -108,9 +115,4 @@ def edit_credit_product(request, credit_product_primary_key, credit_transaction_
         'title': 'Edit Credit Product',
         'form': form,
     })
-
-
-
-
-
 
