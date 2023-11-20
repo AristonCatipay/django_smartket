@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 from . forms import CustomerNumberForm
 from . models import Number
 
+@login_required
 def index(request):
     query = request.GET.get('query', '')
     customer_numbers = Number.objects.all()
@@ -14,6 +15,7 @@ def index(request):
         'customer_numbers': customer_numbers
     })
 
+@login_required
 def add_customer_number(request):
     if request.method == 'POST':
         form = CustomerNumberForm(request.POST)
@@ -28,6 +30,7 @@ def add_customer_number(request):
         'form': form,
     })
 
+@login_required
 def edit_customer_number(request, primary_key):
     number_id = get_object_or_404(Number, id=primary_key)
     if request.method == 'POST':
@@ -43,6 +46,7 @@ def edit_customer_number(request, primary_key):
         'form': form,
     })
 
+@login_required
 def delete_customer_number(request ,primary_key):
     is_delete = True
     customer_number = get_object_or_404(Number, id=primary_key)
