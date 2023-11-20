@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from . forms import ProductForm, MetricUnitForm, CategoryForm, ColorForm, SizeForm
 from . models import Product, Metric_Unit, Category, Color, Size
 
+@login_required
 def index(request):
     query = request.GET.get('query', '')
     category_id = request.GET.get('category', 0)
@@ -22,6 +24,7 @@ def index(request):
         'category_id': int(category_id),
     })
 
+@login_required
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
@@ -36,6 +39,7 @@ def add_product(request):
         'form': form
     })
 
+@login_required
 def edit_product(request, product_primary_key):
     product = get_object_or_404(Product, id=product_primary_key)
     if request.method == 'POST':
@@ -50,6 +54,7 @@ def edit_product(request, product_primary_key):
         'form': form, 
     })
 
+@login_required
 def delete_product(request, product_primary_key):
     model = 'Product'
     is_delete = True
@@ -67,6 +72,7 @@ def delete_product(request, product_primary_key):
         'model': model,
     })
 
+@login_required
 def metric(request):
     metric_units = Metric_Unit.objects.all()
     return render(request, 'product/metric_unit.html', {
@@ -74,6 +80,7 @@ def metric(request):
         'metric_units': metric_units,
     })
 
+@login_required
 def add_metric(request):
     if request.method == 'POST':
         form = MetricUnitForm(request.POST)
@@ -87,7 +94,7 @@ def add_metric(request):
         'form': form,
     })
 
-
+@login_required
 def edit_metric(request, metric_primary_key):
     metric = get_object_or_404(Metric_Unit, id=metric_primary_key)
     if request.method == 'POST':
@@ -103,7 +110,7 @@ def edit_metric(request, metric_primary_key):
         'form': form,
     })
 
-
+@login_required
 def delete_metric(request, metric_primary_key):
     model = 'Metric Unit'
     is_delete = True
@@ -121,6 +128,7 @@ def delete_metric(request, metric_primary_key):
         'model': model,
     })
 
+@login_required
 def category(request):
     categories = Category.objects.all()
     return render(request, 'product/category.html', {
@@ -128,6 +136,7 @@ def category(request):
         'categories': categories,
     })
 
+@login_required
 def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
@@ -141,6 +150,7 @@ def add_category(request):
         'form': form,
     })
 
+@login_required
 def edit_category(request, category_primary_key):
     category = get_object_or_404(Category, id=category_primary_key)
     if request.method == 'POST':
@@ -156,6 +166,7 @@ def edit_category(request, category_primary_key):
         'form': form,
     })
 
+@login_required
 def delete_category(request, category_primary_key):
     model = 'Category'
     is_delete = True
@@ -173,6 +184,7 @@ def delete_category(request, category_primary_key):
         'model': model,
     })
 
+@login_required
 def color(request):
     colors = Color.objects.all()
     return render(request, 'product/color.html', {
@@ -180,6 +192,7 @@ def color(request):
         'colors': colors,
     })
 
+@login_required
 def add_color(request):
     if request.method == 'POST':
         form = ColorForm(request.POST)
@@ -193,6 +206,7 @@ def add_color(request):
         'form': form,
     })
 
+@login_required
 def edit_color(request, color_primary_key):
     color = get_object_or_404(Color, id=color_primary_key)
     if request.method == 'POST':
@@ -208,6 +222,7 @@ def edit_color(request, color_primary_key):
         'form': form,
     })
 
+@login_required
 def delete_color(request, color_primary_key):
     model = 'Color'
     is_delete = True
@@ -225,6 +240,7 @@ def delete_color(request, color_primary_key):
         'model': model,
     })
 
+@login_required
 def size(request):
     sizes = Size.objects.all()
     return render(request, 'product/size.html', {
@@ -232,6 +248,7 @@ def size(request):
         'sizes': sizes,
     })
 
+@login_required
 def add_size(request):
     if request.method == 'POST':
         form = SizeForm(request.POST)
@@ -245,6 +262,7 @@ def add_size(request):
         'form': form,
     })
 
+@login_required
 def edit_size(request, size_primary_key):
     size = get_object_or_404(Size, id=size_primary_key)
     if request.method == 'POST':
@@ -260,6 +278,7 @@ def edit_size(request, size_primary_key):
         'form': form,
     })
 
+@login_required
 def delete_size(request, size_primary_key):
     model = 'Size'
     is_delete = True
