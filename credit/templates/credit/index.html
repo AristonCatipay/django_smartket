@@ -58,7 +58,7 @@
                                 <td class="px-4 py-3">{{ credit_transactions.is_paid }}</td>
                                 <td class="px-4 py-3">{{ credit_transactions.due_date }}</td>
                                 <td class="px-4 py-3">{{ credit_transactions.paid_at }}</td>
-                                <td class="px-4 py-3">{{ credit_transactions.payment_delay }}</td>
+                                <td class="px-4 py-3">{{ credit_transactions.pending_days }}</td>
                                 <td class="px-4 py-3 flex items-center justify-end">
                                     <button id="{{ credit_transactions.id }}-dropdown-button" data-dropdown-toggle="{{ credit_transactions.id }}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -69,6 +69,9 @@
                                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
                                             <li>
                                                 <a href="{% url 'credit:credit_product' credit_transactions.id %}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Products</a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'credit:mark_transaction_as_paid' credit_transactions.id %}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Paid</a>
                                             </li>
                                             <li>
                                                 <a href="{% url 'credit:edit_credit_transaction' credit_transactions.id %}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>

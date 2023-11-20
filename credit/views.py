@@ -45,6 +45,15 @@ def edit_credit_transaction(request, credit_transaction_primary_key):
         'form' : form,
     })
 
+def mark_transaction_as_paid(request, credit_transaction_primary_key):
+    credit_transaction = get_object_or_404(Credit_Transaction, pk=credit_transaction_primary_key)
+    
+    if not credit_transaction.is_paid:
+        credit_transaction.mark_as_paid()
+        credit_transaction.save()
+    
+    return redirect('credit:index')
+
 def credit_product(request, credit_transaction_primary_key):
     credit_products = Credit_Transaction_Item.objects.filter(credit_transaction=credit_transaction_primary_key)
     return render(request, 'credit/credit_product.html', {
