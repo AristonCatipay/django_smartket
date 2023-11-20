@@ -31,6 +31,20 @@ def add_credit_transaction(request):
         'form' : form,
     })
 
+def edit_credit_transaction(request, credit_transaction_primary_key):
+    credit_transaction = get_object_or_404(Credit_Transaction, pk=credit_transaction_primary_key)
+    if request.method == 'POST':
+        form = CreditTransactionForm(request.POST, instance=credit_transaction)
+        if form.is_valid():
+            form.save()
+            return redirect('credit:index')
+    else:
+        form = CreditTransactionForm(instance=credit_transaction)
+    return render(request, 'credit/form.html', {
+        'title': 'Edit Credit Transaction',
+        'form' : form,
+    })
+
 def credit_product(request, credit_transaction_primary_key):
     credit_products = Credit_Transaction_Item.objects.filter(credit_transaction=credit_transaction_primary_key)
     return render(request, 'credit/credit_product.html', {
