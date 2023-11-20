@@ -1,11 +1,16 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from .models import Credit_Transaction, Credit_Transaction_Item
 from .forms import CreditTransactionForm, CreditTransactionItemForm
 from product.models import Product
 
 def index(request):
+    query = request.GET.get('query', '')
     credit_transactions = Credit_Transaction.objects.all()
+    
+    if query:
+        credit_transactions = credit_transactions.filter(Q(customer__first_name__icontains=query) | Q(customer__last_name__icontains=query))
     return render(request, 'credit/index.html', {
         'title': 'Credit',
         'credit_transactions': credit_transactions,
