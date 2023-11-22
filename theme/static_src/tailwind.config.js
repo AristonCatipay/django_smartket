@@ -25,7 +25,8 @@ module.exports = {
               green: colors.emerald,
               purple: colors.violet,
               yellow: colors.amber,
-              pink: colors.fuchsia,
+              pink: colors.pink,
+              orange: colors.orange,
             }
           },
           fontFamily: {
