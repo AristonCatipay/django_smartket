@@ -110,8 +110,8 @@
                     </div>
                     {% endif %}
                 {% endfor %}
-                <button type="submit" class="mt-4 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-200 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-2 mb-2">Submit</button>
-                <a {% if model == 'Product' %} href="{% url 'product:index' %}" {% else %} href="{% url 'product:metric' %}" {% endif %} class="mt-4 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-200 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-2 mb-2">Cancel</a>
+                <button type="submit" class="mt-4 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-200 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-2 mb-2">Submit</button>
+                <a {% if model == 'Product' %} href="{% url 'product:index' %}" {% else %} href="{% url 'product:metric' %}" {% endif %} class="mt-4 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-200 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-2 mb-2">Cancel</a>
             </div>
         </form>
     </div>
