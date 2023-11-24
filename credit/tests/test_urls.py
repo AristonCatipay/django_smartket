@@ -11,4 +11,8 @@ class TestUrls(SimpleTestCase):
         url = reverse('credit:add_credit_transaction')
         self.assertEquals(resolve(url).func, add_credit_transaction)
 
+    def test_edit_credit_transaction_url(self):
+        credit_transaction_primary_key = 2
+        url = reverse('credit:edit_credit_transaction', args=[credit_transaction_primary_key])
+        self.assertEquals(resolve(url).func, edit_credit_transaction)
     
