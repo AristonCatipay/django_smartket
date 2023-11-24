@@ -21,7 +21,7 @@ def index(request):
     metric_unit_total = Metric_Unit.objects.count()
     customer_total = Customer.objects.count()
     credit_transaction_total = Credit_Transaction.objects.count()
-    user_total = User.objects.filter(is_superuser = False).count()
+    credit_transaction_not_paid_total = Credit_Transaction.objects.filter(is_paid=False).count()
     return render(request, 'core/index.html', {
         'title': 'Welcome',
         'product_total': product_total,
@@ -31,7 +31,7 @@ def index(request):
         'metric_unit_total': metric_unit_total,
         'customer_total': customer_total,
         'credit_transaction_total': credit_transaction_total,
-        'user_total': user_total,
+        'credit_transaction_not_paid_total': credit_transaction_not_paid_total,
     })
 
 @unauthenticated_user

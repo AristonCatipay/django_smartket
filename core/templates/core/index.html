@@ -120,27 +120,28 @@
        <div class="justify-self-start">
           <div class="flex-1 min-w-0">
              <p class="text-2xl font-semibold text-gray-900 truncate dark:text-white">
-                 {{ credit_transaction_total }}
+                 {{ credit_transaction_not_paid_total }}
              </p>
              <p class="text-lg text-gray-500 truncate dark:text-gray-400">
-                Credit
+                Unpaid Credit
              </p>
          </div>
        </div>
     </div>
     <div class="grid grid-cols-2 gap-4 items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
        <div class="justify-self-end w-16 h-16 rounded-full text-orange-100 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 flex items-center justify-center mb-1">
-          <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3a3 3 0 1 1-1.614 5.53M15 12a4 4 0 0 1 4 4v1h-3.348M10 4.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0ZM5 11h3a4 4 0 0 1 4 4v2H1v-2a4 4 0 0 1 4-4Z"/>
+          <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+            <path d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM2 12V6h16v6H2Z"/>
+            <path d="M6 8H4a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2Zm8 0H9a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2Z"/>
           </svg>
        </div>
        <div class="justify-self-start">
           <div class="flex-1 min-w-0">
              <p class="text-2xl font-semibold text-gray-900 truncate dark:text-white">
-                 {{ user_total }}
+               {{ credit_transaction_total }}
              </p>
              <p class="text-lg text-gray-500 truncate dark:text-gray-400">
-                 User
+               Credit 
              </p>
          </div>
        </div>
