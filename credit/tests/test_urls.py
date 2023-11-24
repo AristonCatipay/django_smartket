@@ -6,3 +6,9 @@ class TestUrls(SimpleTestCase):
     def test_index_url(self):
         url = reverse('credit:index')
         self.assertEquals(resolve(url).func, index)
+    
+    def test_add_credit_transaction_url(self):
+        url = reverse('credit:add_credit_transaction')
+        self.assertEquals(resolve(url).func, add_credit_transaction)
+
+    
