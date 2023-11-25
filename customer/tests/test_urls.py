@@ -38,3 +38,13 @@ class TestUrls(TestCase):
     def test_add_customer_url(self):
         url = reverse('customer:add_customer')
         self.assertEqual(resolve(url).func, add_customer)
+
+    def test_edit_customer_url(self):
+        customer = self.customer
+        url = reverse('customer:edit_customer', args=[customer.pk])
+        self.assertEqual(resolve(url).func, edit_customer)
+    
+    def test_delete_customer_url(self):
+        customer = self.customer
+        url = reverse('customer:delete_customer', args=[customer.pk])
+        self.assertEqual(resolve(url).func, delete_customer)
