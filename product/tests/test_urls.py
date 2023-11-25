@@ -106,6 +106,16 @@ class TestUrls(TestCase):
     def test_add_category_url(self):
         url = reverse('product:add_category')
         self.assertEquals(resolve(url).func, add_category)
+    
+    def test_edit_category_url(self):
+        category = self.create_test_category()
+        url = reverse('product:edit_category', args=[category.pk])
+        self.assertEquals(resolve(url).func, edit_category)
+    
+    def test_delete_category_url(self):
+        category = self.create_test_category()
+        url = reverse('product:delete_category', args=[category.pk])
+        self.assertEquals(resolve(url).func, delete_category)
 
     def test_color_url(self):
         url = reverse('product:color')
