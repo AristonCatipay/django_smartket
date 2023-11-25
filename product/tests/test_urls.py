@@ -31,23 +31,43 @@ class TestUrls(TestCase):
         # Clean up the test data after all tests are done
         # This method runs once at the end of the test suite
         cls.customer.delete()
-        
+
     def test_index_url(self):
         url = reverse('product:index')
         self.assertEqual(resolve(url).func, index)
+
+    def test_add_product_url(self):
+        url = reverse('product:add_product')
+        self.assertEquals(resolve(url).func, add_product)
     
     def test_metric_url(self):
         url = reverse('product:metric')
         self.assertEqual(resolve(url).func, metric)
     
+    def test_add_metric_url(self):
+        url = reverse('product:add_metric')
+        self.assertEquals(resolve(url).func, add_metric)
+    
     def test_category_url(self):
         url = reverse('product:category')
         self.assertEqual(resolve(url).func, category)
+
+    def test_add_category_url(self):
+        url = reverse('product:add_category')
+        self.assertEquals(resolve(url).func, add_category)
 
     def test_color_url(self):
         url = reverse('product:color')
         self.assertEqual(resolve(url).func, color)
 
+    def test_add_color_url(self):
+        url = reverse('product:add_color')
+        self.assertEquals(resolve(url).func, add_color)
+
     def test_size_url(self):
         url = reverse('product:size')
         self.assertEqual(resolve(url).func, size)
+    
+    def test_add_size_url(self):
+        url = reverse('product:add_size')
+        self.assertEquals(resolve(url).func, add_size)
