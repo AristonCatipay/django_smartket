@@ -124,6 +124,16 @@ class TestUrls(TestCase):
     def test_add_color_url(self):
         url = reverse('product:add_color')
         self.assertEquals(resolve(url).func, add_color)
+    
+    def test_edit_color_url(self):
+        color = self.create_test_color()
+        url = reverse('product:edit_color', args=[color.pk])
+        self.assertEquals(resolve(url).func, edit_color)
+
+    def test_delete_color_url(self):
+        color = self.create_test_color()
+        url = reverse('product:delete_color', args=[color.pk])
+        self.assertEquals(resolve(url).func, delete_color)
 
     def test_size_url(self):
         url = reverse('product:size')
