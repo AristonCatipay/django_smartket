@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from credit.views import index, add_credit_transaction, edit_credit_transaction, mark_transaction_as_paid, credit_product, add_credit_product, edit_credit_product 
 from credit.models import Credit_Transaction
 from customer.models import Customer
+from product.models import Product, Metric_Unit, Size, Category, Color
 
 class TestUrls(TestCase):
     @classmethod
@@ -20,6 +21,7 @@ class TestUrls(TestCase):
         barangay = 'testing barangay'
         city = 'testing city'
         birth_date = '1906-06-13'
+
         cls.customer = Customer.objects.create(
             first_name=first_name, last_name=last_name, username=username,
             age=age, gender=gender, email=email, civil_status=civil_status,
@@ -32,8 +34,41 @@ class TestUrls(TestCase):
     @classmethod
     def tearDownClass(cls):
         # Clean up the test data after all tests are done
+        # This method runs once at the end of the test suite
         cls.customer.delete()
         cls.user.delete()
+
+        Color.objects.filter(name='test_color').delete()
+        Size.objects.filter(name='test_size').delete()
+        Category.objects.filter(name='test_category').delete()
+        Metric_Unit.objects.filter(name='test_unit').delete()
+        super().tearDownClass()
+
+    # Methods to create specific test objects
+    def create_test_color(self):
+        return Color.objects.create(name='test_color')
+
+    def create_test_size(self):
+        return Size.objects.create(name='test_size')
+
+    def create_test_category(self):
+        return Category.objects.create(name='test_category')
+
+    def create_test_metric_unit(self):
+        return Metric_Unit.objects.create(name='test_unit')
+
+    def create_test_credit_product(self):
+        color = self.create_test_color()
+        size = self.create_test_size()
+        category = self.create_test_category()
+        metric_unit = self.create_test_metric_unit()
+
+        return Product.objects.create(
+            product_name='product_testing', product_price=50,
+            metric_number=150, metric_unit=metric_unit,
+            product_category=category, product_color=color,
+            product_size=size,
+        )
 
     def create_test_credit_transaction(self):
         return Credit_Transaction.objects.create(
@@ -69,3 +104,12 @@ class TestUrls(TestCase):
         credit_transaction = self.create_test_credit_transaction()
         url = reverse('credit:add_credit_product', args=[credit_transaction.pk])
         self.assertEquals(resolve(url).func, add_credit_product)
+
+    def test_edit_credit_product_url(self):
+        credit_transaction = self.create_test_credit_transaction()
+        credit_product = self.create_test_credit_product()
+        url = reverse('credit:edit_credit_product', args=[credit_product.pk, credit_transaction.pk])
+
+        self.assertIsNotNone(credit_transaction)
+        self.assertIsNotNone(credit_product)
+        self.assertEqual(resolve(url).func, edit_credit_product)
