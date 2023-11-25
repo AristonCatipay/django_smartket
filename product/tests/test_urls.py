@@ -75,6 +75,11 @@ class TestUrls(TestCase):
         product = self.create_test_product()
         url = reverse('product:edit_product', args=[product.pk])
         self.assertEquals(resolve(url).func, edit_product)
+
+    def test_delete_product_url(self):
+        product = self.create_test_product()
+        url = reverse('product:delete_product', args=[product.pk])
+        self.assertEquals(resolve(url).func, delete_product)
     
     def test_metric_url(self):
         url = reverse('product:metric')
