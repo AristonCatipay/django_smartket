@@ -88,6 +88,16 @@ class TestUrls(TestCase):
     def test_add_metric_url(self):
         url = reverse('product:add_metric')
         self.assertEquals(resolve(url).func, add_metric)
+
+    def test_edit_metric_url(self):
+        metric = self.create_test_metric_unit()
+        url = reverse('product:edit_metric', args=[metric.pk])
+        self.assertEquals(resolve(url).func, edit_metric)
+
+    def test_delete_metric_url(self):
+        metric = self.create_test_metric_unit()
+        url = reverse('product:delete_metric', args=[metric.pk])
+        self.assertEquals(resolve(url).func, delete_metric)
     
     def test_category_url(self):
         url = reverse('product:category')
