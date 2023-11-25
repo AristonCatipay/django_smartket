@@ -31,6 +31,37 @@ class TestUrls(TestCase):
         # Clean up the test data after all tests are done
         # This method runs once at the end of the test suite
         cls.customer.delete()
+        Color.objects.filter(name='test_color').delete()
+        Size.objects.filter(name='test_size').delete()
+        Category.objects.filter(name='test_category').delete()
+        Metric_Unit.objects.filter(name='test_unit').delete()
+        super().tearDownClass()
+
+    # Methods to create specific test objects
+    def create_test_color(self):
+        return Color.objects.create(name='test_color')
+
+    def create_test_size(self):
+        return Size.objects.create(name='test_size')
+
+    def create_test_category(self):
+        return Category.objects.create(name='test_category')
+
+    def create_test_metric_unit(self):
+        return Metric_Unit.objects.create(name='test_unit')
+
+    def create_test_product(self):
+        color = self.create_test_color()
+        size = self.create_test_size()
+        category = self.create_test_category()
+        metric_unit = self.create_test_metric_unit()
+
+        return Product.objects.create(
+            product_name='product_testing', product_price=50,
+            metric_number=150, metric_unit=metric_unit,
+            product_category=category, product_color=color,
+            product_size=size,
+        )
 
     def test_index_url(self):
         url = reverse('product:index')
@@ -39,6 +70,11 @@ class TestUrls(TestCase):
     def test_add_product_url(self):
         url = reverse('product:add_product')
         self.assertEquals(resolve(url).func, add_product)
+    
+    def test_edit_product_url(self):
+        product = self.create_test_product()
+        url = reverse('product:edit_product', args=[product.pk])
+        self.assertEquals(resolve(url).func, edit_product)
     
     def test_metric_url(self):
         url = reverse('product:metric')
