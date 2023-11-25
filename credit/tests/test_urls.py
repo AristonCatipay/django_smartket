@@ -54,3 +54,8 @@ class TestUrls(TestCase):
         credit_transaction = self.create_test_credit_transaction()
         url = reverse('credit:edit_credit_transaction', args=[credit_transaction.pk])
         self.assertEquals(resolve(url).func, edit_credit_transaction)
+
+    def test_mark_transaction_as_paid_url(self):
+        credit_transaction = self.create_test_credit_transaction()
+        url = reverse('credit:mark_transaction_as_paid', args=[credit_transaction.pk])
+        self.assertEquals(resolve(url).func, mark_transaction_as_paid)
