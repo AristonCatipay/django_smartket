@@ -142,3 +142,13 @@ class TestUrls(TestCase):
     def test_add_size_url(self):
         url = reverse('product:add_size')
         self.assertEquals(resolve(url).func, add_size)
+
+    def test_edit_size_url(self):
+        size = self.create_test_size()
+        url = reverse('product:edit_size', args=[size.pk])
+        self.assertEquals(resolve(url).func, edit_size)
+
+    def test_delete_size_url(self):
+        size = self.create_test_size()
+        url = reverse('product:delete_size', args=[size.pk])
+        self.assertEquals(resolve(url).func, delete_size)
