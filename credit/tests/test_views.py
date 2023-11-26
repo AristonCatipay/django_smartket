@@ -42,6 +42,12 @@ class CreditViewsTestCase(TestCase):
             product_color=self.color,
             product_size=self.size,
         )
+        
+        self.credit_product = Credit_Transaction_Item.objects.create(
+            credit_transaction=self.credit_transaction,
+            product=self.product,
+            product_current_price=self.product.product_price
+        )
 
     def test_index_view(self):
         self.client.force_login(self.user)
@@ -97,6 +103,19 @@ class CreditViewsTestCase(TestCase):
     def test_add_credit_product_view(self):
         self.client.force_login(self.user)
         url = reverse('credit:add_credit_product', kwargs={'credit_transaction_primary_key': self.credit_transaction.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'credit/form.html')
+
+        data = {
+            'product': self.product.id,
+        }
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 302)
+    
+    def test_edit_credit_product_view(self):
+        self.client.force_login(self.user)
+        url = reverse('credit:edit_credit_product', kwargs={'credit_product_primary_key': self.credit_product.pk, 'credit_transaction_primary_key': self.credit_transaction.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'credit/form.html')
