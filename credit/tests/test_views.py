@@ -9,7 +9,7 @@ from datetime import date
 class CreditViewsTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='12345')
-        
+
         self.customer = Customer.objects.create(
             first_name='John',
             last_name='Doe',
@@ -63,5 +63,14 @@ class CreditViewsTestCase(TestCase):
         }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
+
+    def test_mark_transaction_as_paid_view(self):
+        self.client.force_login(self.user)
+        url = reverse('credit:mark_transaction_as_paid', kwargs={'credit_transaction_primary_key': self.credit_transaction.pk})
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 302)
+
+        updated_credit_transaction = Credit_Transaction.objects.get(pk=self.credit_transaction.pk)
+        self.assertTrue(updated_credit_transaction.is_paid)
 
     
