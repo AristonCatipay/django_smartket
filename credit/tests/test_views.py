@@ -42,7 +42,7 @@ class CreditViewsTestCase(TestCase):
             product_color=self.color,
             product_size=self.size,
         )
-        
+
         self.credit_product = Credit_Transaction_Item.objects.create(
             credit_transaction=self.credit_transaction,
             product=self.product,
@@ -125,3 +125,15 @@ class CreditViewsTestCase(TestCase):
         }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
+
+    def tearDown(self):
+        # Cleanup after each test
+        self.credit_product.delete()
+        self.product.delete()
+        self.credit_transaction.delete()
+        self.customer.delete()
+        self.user.delete()
+        self.metric_unit.delete()
+        self.category.delete()
+        self.color.delete()
+        self.size.delete()
