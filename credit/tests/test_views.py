@@ -73,4 +73,9 @@ class CreditViewsTestCase(TestCase):
         updated_credit_transaction = Credit_Transaction.objects.get(pk=self.credit_transaction.pk)
         self.assertTrue(updated_credit_transaction.is_paid)
 
-    
+    def test_credit_product_view(self):
+        self.client.force_login(self.user)
+        url = reverse('credit:credit_product', kwargs={'credit_transaction_primary_key': self.credit_transaction.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'credit/credit_product.html')
