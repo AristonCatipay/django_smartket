@@ -29,6 +29,20 @@ class CreditViewsTestCase(TestCase):
             is_paid=False
         )
 
+        self.metric_unit = Metric_Unit.objects.create(name='test metric unit')
+        self.category = Category.objects.create(name='test category')
+        self.color = Color.objects.create(name='test color')
+        self.size = Size.objects.create(name='test size')
+
+        self.product = Product.objects.create(
+            product_name='Test Product',
+            product_price=100,
+            metric_unit=self.metric_unit,
+            product_category=self.category,
+            product_color=self.color,
+            product_size=self.size,
+        )
+
     def test_index_view(self):
         self.client.force_login(self.user)
         url = reverse('credit:index')
@@ -79,3 +93,16 @@ class CreditViewsTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'credit/credit_product.html')
+
+    def test_add_credit_product_view(self):
+        self.client.force_login(self.user)
+        url = reverse('credit:add_credit_product', kwargs={'credit_transaction_primary_key': self.credit_transaction.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'credit/form.html')
+
+        data = {
+            'product': self.product.id,
+        }
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 302)
