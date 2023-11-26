@@ -9,6 +9,17 @@ from datetime import date
 class CreditViewsTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='12345')
+        self.customer = Customer.objects.create(
+            first_name='John',
+            last_name='Doe',
+            username='johndoe',
+            age='30',
+            gender='M',
+            email='johndoe@example.com',
+            street='123 Main St',
+            city='Some City',
+            birth_date=date(1993, 5, 15),
+        )
 
     def test_index_view(self):
         self.client.force_login(self.user)
@@ -16,5 +27,19 @@ class CreditViewsTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'credit/index.html')
+    
+    def test_add_credit_transaction_view(self):
+        self.client.force_login(self.user)
+        url = reverse('credit:add_credit_transaction')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'credit/form.html')
+
+        data = {
+            'customer': self.customer.id,
+            'due_date': '2023-12-31',
+        }
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 302)
 
     
