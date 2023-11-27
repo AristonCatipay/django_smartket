@@ -30,7 +30,20 @@ class CoreViewTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response ,'core/signup.html')
+
+    def test_signout_view(self):
+        # Assuming your URL name for signout is 'core:signout'
+        url = reverse('core:signout')
         
+        # You can directly use the self.client.post method for the sign-out action
+        response = self.client.post(url)
+        
+        # Check if the sign-out action results in a redirect (status code 302)
+        self.assertEqual(response.status_code, 302)
+
+        # You can also check if the user is no longer authenticated after signout
+        self.assertNotIn('_auth_user_id', self.client.session)
+    
     def tearDown(self):
         # Cleanup after each test
         self.user.delete()
