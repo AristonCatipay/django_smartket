@@ -89,6 +89,33 @@ class NumberViewTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
         # Print data for inspection
         print("\nTest Data Used (Edit Customer Number):", data, "\n")
+    
+    def test_delete_customer_number(self):
+        self.client.force_login(self.user)
+        url = reverse('number:delete_customer_number', kwargs={'primary_key': self.number.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'number/form.html')
+
+        data = {
+            'customer': self.customer.pk,
+            'number': self.number.number ,
+            'network': self.number.network,
+            'load': self.number.load,
+        }
+
+        response = self.client.post(url, data)
+
+        if response.context:
+            # Retrieve form instance to access errors
+            form = response.context['form']
+            # print(form.fields['network'].choices)
+            if form.errors:
+                print(form.errors)
+
+        self.assertEqual(response.status_code, 302)
+        # Print data for inspection
+        print("\nTest Data Used (Delete Customer Number):", data, "\n")
 
     def tearDown(self):
         # Cleanup after each test
