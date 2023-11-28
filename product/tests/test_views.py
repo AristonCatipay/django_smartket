@@ -124,6 +124,13 @@ class ProductViewTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response ,'product/category.html')
+
+    def test_color_view(self):
+        self.client.force_login(self.user)
+        url = reverse('product:color')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response ,'product/color.html')
     
         
     def tearDown(self):
