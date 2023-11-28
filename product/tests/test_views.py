@@ -111,12 +111,12 @@ class ProductViewTestCase(TestCase):
 
         self.assertEqual(response.status_code, 302)
 
-    # def test_index_view(self):
-    #     self.client.force_login(self.user)
-    #     url = reverse('product:index')
-    #     response = self.client.get(url)
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response ,'product/index.html')
+    def test_metric_view(self):
+        self.client.force_login(self.user)
+        url = reverse('product:metric')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response ,'product/metric_unit.html')
         
     def tearDown(self):
         # Cleanup after each test
