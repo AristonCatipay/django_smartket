@@ -117,6 +117,14 @@ class ProductViewTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response ,'product/metric_unit.html')
+
+    def test_category_view(self):
+        self.client.force_login(self.user)
+        url = reverse('product:category')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response ,'product/category.html')
+    
         
     def tearDown(self):
         # Cleanup after each test
