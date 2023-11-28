@@ -82,6 +82,41 @@ class ProductViewTestCase(TestCase):
                 print(form.errors)
 
         self.assertEqual(response.status_code, 302)
+
+    def test_delete_product_view(self):
+        self.client.force_login(self.user)
+        url = reverse('product:delete_product', kwargs={'product_primary_key': self.product.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'product/form.html')
+
+        data = {
+            'product_name': self.product.product_name,
+            'product_price': self.product.product_price,
+            'metric_number': self.product.metric_number,
+            'metric_unit': self.metric_unit.pk,
+            'product_category': self.category.pk,
+            'product_color': self.color.pk,
+            'product_size': self.size.pk,
+        }
+
+        response = self.client.post(url, data)
+        print("\nTest Data Used (Delete Product):", data, "\n")
+
+        if response.context:
+            # Retrieve form instance to access errors
+            form = response.context['form']
+            if form.errors:
+                print(form.errors)
+
+        self.assertEqual(response.status_code, 302)
+
+    # def test_index_view(self):
+    #     self.client.force_login(self.user)
+    #     url = reverse('product:index')
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response ,'product/index.html')
         
     def tearDown(self):
         # Cleanup after each test
