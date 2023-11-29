@@ -68,6 +68,14 @@ class CreditViewsTestCase(TestCase):
             'due_date': '2023-12-31',
         }
         response = self.client.post(url, data)
+        print("\nTest Data Used (Add Credit Transaction):", data, "\n")
+
+        if response.context:
+            # Retrieve form instance to access errors
+            form = response.context['form']
+            if form.errors:
+                print(form.errors)
+
         self.assertEqual(response.status_code, 302)
 
     def test_edit_credit_transaction_view(self):
@@ -82,6 +90,14 @@ class CreditViewsTestCase(TestCase):
             'due_date': self.credit_transaction.due_date,
         }
         response = self.client.post(url, data)
+        print("\nTest Data Used (Edit Credit Transaction):", data, "\n")
+
+        if response.context:
+            # Retrieve form instance to access errors
+            form = response.context['form']
+            if form.errors:
+                print(form.errors)
+
         self.assertEqual(response.status_code, 302)
 
     def test_mark_transaction_as_paid_view(self):
@@ -111,6 +127,14 @@ class CreditViewsTestCase(TestCase):
             'product': self.product.id,
         }
         response = self.client.post(url, data)
+        print("\nTest Data Used (Add Credit Product):", data, "\n")
+
+        if response.context:
+            # Retrieve form instance to access errors
+            form = response.context['form']
+            if form.errors:
+                print(form.errors)
+
         self.assertEqual(response.status_code, 302)
     
     def test_edit_credit_product_view(self):
@@ -124,6 +148,14 @@ class CreditViewsTestCase(TestCase):
             'product': self.product.id,
         }
         response = self.client.post(url, data)
+        print("\nTest Data Used (Edit Credit Product):", data, "\n")
+
+        if response.context:
+            # Retrieve form instance to access errors
+            form = response.context['form']
+            if form.errors:
+                print(form.errors)
+
         self.assertEqual(response.status_code, 302)
 
     def tearDown(self):
