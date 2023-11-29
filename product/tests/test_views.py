@@ -118,6 +118,27 @@ class ProductViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response ,'product/metric_unit.html')
 
+    def test_add_metric_view(self):
+        self.client.force_login(self.user)
+        url = reverse('product:add_metric')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'product/form.html')
+
+        data = {
+            'name': self.metric_unit.pk,
+        }
+        response = self.client.post(url, data)
+        print("\nTest Data Used (Add Product Metric):", data, "\n")
+
+        if response.context:
+            # Retrieve form instance to access errors
+            form = response.context['form']
+            if form.errors:
+                print(form.errors)
+
+        self.assertEqual(response.status_code, 302)
+
     def test_category_view(self):
         self.client.force_login(self.user)
         url = reverse('product:category')
