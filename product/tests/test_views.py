@@ -264,6 +264,27 @@ class ProductViewTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response ,'product/size.html')
+
+    def test_add_size_view(self):
+        self.client.force_login(self.user)
+        url = reverse('product:add_size')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'product/form.html')
+
+        data = {
+            'name': self.color.pk,
+        }
+        response = self.client.post(url, data)
+        print("\nTest Data Used (Add Product Size):", data, "\n")
+
+        if response.context:
+            # Retrieve form instance to access errors
+            form = response.context['form']
+            if form.errors:
+                print(form.errors)
+
+        self.assertEqual(response.status_code, 302)
     
         
     def tearDown(self):
