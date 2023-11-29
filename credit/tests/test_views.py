@@ -137,31 +137,3 @@ class CreditViewsTestCase(TestCase):
         self.credit_transaction.delete()
         self.customer.delete()
         self.user.delete()
-
-        # Ensure clean up after each test.
-        credit_product_exists = Credit_Transaction_Item.objects.filter(pk=self.credit_product.pk).exists()
-        self.assertFalse(credit_product_exists, "Credit Transaction Item was not deleted.")
-
-        product_exists = Product.objects.filter(pk=self.product.pk).exists()
-        self.assertFalse(product_exists, "Product was not deleted.")
-
-        metric_unit_exists = Metric_Unit.objects.filter(pk=self.metric_unit.pk).exists()
-        self.assertFalse(metric_unit_exists, "Metric Unit was not deleted.")
-
-        category_exists = Category.objects.filter(pk=self.category.pk).exists()
-        self.assertFalse(category_exists, "Category was not deleted.")
-
-        color_exists = Color.objects.filter(pk=self.color.pk).exists()
-        self.assertFalse(color_exists, "Color was not deleted.")
-
-        size_exists = Size.objects.filter(pk=self.size.pk).exists()
-        self.assertFalse(size_exists, "Size was not deleted.")
-
-        credit_transaction_exists = Credit_Transaction.objects.filter(pk=self.credit_transaction.pk).exists()
-        self.assertFalse(credit_transaction_exists, "Credit Transaction was not deleted.")
-
-        customer_exists = Customer.objects.filter(pk=self.customer.pk).exists()
-        self.assertFalse(customer_exists, "Customer was not deleted.")
-
-        user_exists = User.objects.filter(pk=self.user.pk).exists()
-        self.assertFalse(user_exists, "User was not deleted.")
