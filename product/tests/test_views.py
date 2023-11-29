@@ -273,7 +273,7 @@ class ProductViewTestCase(TestCase):
         self.assertTemplateUsed(response, 'product/form.html')
 
         data = {
-            'name': self.color.pk,
+            'name': self.size.pk,
         }
         response = self.client.post(url, data)
         print("\nTest Data Used (Add Product Size):", data, "\n")
@@ -285,8 +285,33 @@ class ProductViewTestCase(TestCase):
                 print(form.errors)
 
         self.assertEqual(response.status_code, 302)
-    
-        
+
+    def test_edit_size_view(self):
+        self.client.force_login(self.user)
+        url = reverse('product:edit_size', kwargs={'size_primary_key': self.size.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'product/form.html')
+
+        data = {
+            'name': self.size.pk,
+        }
+        response = self.client.post(url, data)
+        print("\nTest Data Used (Edit Product Size):", data, "\n")
+
+        if response.context:
+            # Retrieve form instance to access errors
+            form = response.context['form']
+            if form.errors:
+                print(form.errors)
+
+        self.assertEqual(response.status_code, 302)
+
     def tearDown(self):
         # Cleanup after each test
         self.user.delete()
+        self.metric_unit.delete()
+        self.category.delete()
+        self.color.delete()
+        self.size.delete()
+        self.product.delete()
