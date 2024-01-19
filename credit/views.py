@@ -1,6 +1,7 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required
 from product.models import Product
 from .models import Credit_Transaction, Credit_Transaction_Item
 from .forms import CreditTransactionForm, CreditTransactionItemForm
@@ -25,6 +26,7 @@ def add_credit_transaction(request):
             credit_transaction = form.save(commit=False)
             credit_transaction.created_by = request.user
             credit_transaction.save()
+            messages.success('Successful! Credit transaction has been created.')
             return redirect('credit:index')
     else:
         form = CreditTransactionForm()
@@ -40,6 +42,7 @@ def edit_credit_transaction(request, credit_transaction_primary_key):
         form = CreditTransactionForm(request.POST, instance=credit_transaction)
         if form.is_valid():
             form.save()
+            messages.success('Successful! Credit transaction has been edited.')
             return redirect('credit:index')
     else:
         form = CreditTransactionForm(instance=credit_transaction)
@@ -55,6 +58,7 @@ def mark_transaction_as_paid(request, credit_transaction_primary_key):
     if not credit_transaction.is_paid:
         credit_transaction.mark_as_paid()
         credit_transaction.save()
+        messages.success('Successful! Credit transaction has been marked as paid.')
     
     return redirect('credit:index')
 
@@ -85,6 +89,7 @@ def add_credit_product(request, credit_transaction_primary_key):
             credit_product.product_current_price = product.product_price
 
             credit_product.save()
+            messages.success('Successful! Credit product has been created.')
             return redirect('credit:credit_product', credit_transaction_primary_key)
     else:
         form = CreditTransactionItemForm()
@@ -108,6 +113,7 @@ def edit_credit_product(request, credit_product_primary_key, credit_transaction_
             credit_product.product = product
             credit_product.product_current_price = product.product_price
             credit_product.save()
+            messages.success('Successful! Credit product has been edited.')
             return redirect('credit:credit_product', credit_transaction_primary_key)
     else:
         form = CreditTransactionItemForm(instance=credit_product)

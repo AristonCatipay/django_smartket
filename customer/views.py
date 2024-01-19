@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.db.models import Q
 from . forms import CustomerForm
 from . models import Customer
@@ -24,6 +25,7 @@ def add_customer(request):
 
         if form.is_valid():
             form.save()
+            messages.success('Successful! Customer details has been created.')
             return redirect('customer:index')
     else:
         form = CustomerForm()
@@ -39,6 +41,7 @@ def edit_customer(request, primary_key):
         form = CustomerForm(request.POST, instance=customer)
         if form.is_valid():
             form.save()
+            messages.success('Successful! Customer details has been edited.')
             return redirect('customer:index')
     else:
         form = CustomerForm(instance=customer)
@@ -54,6 +57,7 @@ def delete_customer(request, primary_key):
     if request.method == 'POST':
         form = CustomerForm(request.POST, instance=customer)
         customer.delete()
+        messages.success('Successful! Customer details has been deleted.')
         return redirect('customer:index')
     else:
         form = CustomerForm(instance=customer)
