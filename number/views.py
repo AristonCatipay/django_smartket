@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from . forms import CustomerNumberForm
 from . models import Number
 
@@ -22,6 +23,7 @@ def add_customer_number(request):
 
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Customer number has been saved.')
             return redirect('number:index')
     else:
         form = CustomerNumberForm()
@@ -38,6 +40,7 @@ def edit_customer_number(request, primary_key):
 
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Customer number has been edited.')
             return redirect('number:index')
     else:
         form = CustomerNumberForm(instance=number_id)
@@ -53,6 +56,7 @@ def delete_customer_number(request ,primary_key):
     if request.method == 'POST':
         form = CustomerNumberForm(request.POST, instance=customer_number)
         customer_number.delete()
+        messages.success(request, 'Successful! Customer number has been deleted.')
         return redirect('number:index')
     else: 
         form = CustomerNumberForm(instance=customer_number)
