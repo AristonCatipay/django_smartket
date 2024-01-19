@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from . forms import ProductForm, MetricUnitForm, CategoryForm, ColorForm, SizeForm
 from . models import Product, Metric_Unit, Category, Color, Size
 
@@ -31,6 +32,7 @@ def add_product(request):
         
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product details has been created.')
             return redirect('product:index')
     else:
         form = ProductForm()
@@ -46,6 +48,7 @@ def edit_product(request, product_primary_key):
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product details has been edited.')
             return redirect('product:index')
     else:
         form = ProductForm(instance=product)
@@ -62,6 +65,7 @@ def delete_product(request, product_primary_key):
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
         product.delete()
+        messages.success(request, 'Successful! Product details has been deleted.')
         return redirect('product:index')
     else:
         form = ProductForm(instance=product)
@@ -86,6 +90,7 @@ def add_metric(request):
         form = MetricUnitForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product metric has been added.')
             return redirect('product:metric')
     else:
         form = MetricUnitForm()
@@ -101,6 +106,7 @@ def edit_metric(request, metric_primary_key):
         form = MetricUnitForm(request.POST, instance=metric)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product metric has been edited.')
             return redirect('product:metric')
     else:
         form = MetricUnitForm(instance=metric)
@@ -118,6 +124,7 @@ def delete_metric(request, metric_primary_key):
     if request.method == 'POST':
         form = MetricUnitForm(request.POST, instance=metric)
         metric.delete()
+        messages.success(request, 'Successful! Product metric has been deleted.')
         return redirect('product:metric')
     else:
         form = MetricUnitForm(instance=metric)
@@ -142,6 +149,7 @@ def add_category(request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product category has been added.')
             return redirect('product:category')
     else:
         form = CategoryForm()
@@ -157,6 +165,7 @@ def edit_category(request, category_primary_key):
         form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product category has been edited.')
             return redirect('product:category')
     else:
         form = CategoryForm(instance=category)
@@ -174,6 +183,7 @@ def delete_category(request, category_primary_key):
     if request.method == 'POST':
         form = CategoryForm(request.POST, instance=category)
         category.delete()
+        messages.success(request, 'Successful! Product category has been deleted.')
         return redirect('product:category')
     else:
         form = CategoryForm(instance=category)
@@ -198,6 +208,7 @@ def add_color(request):
         form = ColorForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product color has been added.')
             return redirect('product:color')
     else:
         form = ColorForm()
@@ -213,6 +224,7 @@ def edit_color(request, color_primary_key):
         form = ColorForm(request.POST, instance=color)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product color has been edited.')
             return redirect('product:color')
     else:
         form = ColorForm(instance=color)
@@ -230,6 +242,7 @@ def delete_color(request, color_primary_key):
     if request.method == 'POST':
         form = ColorForm(request.POST, instance=color)
         color.delete()
+        messages.success(request, 'Successful! Product color has been deleted.')
         return redirect('product:color')
     else:
         form = ColorForm(instance=color)
@@ -254,6 +267,7 @@ def add_size(request):
         form = SizeForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product size has been added.')
             return redirect('product:size')
     else:
         form = SizeForm()
@@ -269,6 +283,7 @@ def edit_size(request, size_primary_key):
         form = SizeForm(request.POST, instance=size)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successful! Product size has been edited.')
             return redirect('product:size')
     else:
         form = SizeForm(instance=size)
@@ -286,6 +301,7 @@ def delete_size(request, size_primary_key):
     if request.method == 'POST':
         form = SizeForm(request.POST, instance=size)
         size.delete()
+        messages.success(request, 'Successful! Product size has been deleted.')
         return redirect('product:size')
     else:
         form = SizeForm(instance=size)

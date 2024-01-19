@@ -31,7 +31,7 @@ def edit(request):
         request.user.username = username
         request.user.email = email
         request.user.save()
-
+        messages.success(request, "Profile updated successfully! Your changes have been saved.")
         return redirect('profile:edit')
 
     return render(request, 'user_profile/edit.html', {
@@ -47,10 +47,10 @@ def change_password(request):
         if new_password == confirm_new_password:
             request.user.set_password(new_password)
             request.user.save()
-            messages.info(request, 'Successful')
+            messages.success(request, 'Password updated successfully!')
             return redirect('core:signin')
         else:
-            messages.info(request, 'Password don\'t match')
+            messages.error(request, 'Failed to update password. New password does not match.')
             return redirect('profile:change_password')
             
     return render(request, 'user_profile/change_password.html', {
