@@ -47,13 +47,17 @@ def change_password(request):
             confirm_new_password = request.POST['confirm_new_password'] 
 
             if request.user.check_password(old_password):
-                if new_password == confirm_new_password:
-                    request.user.set_password(new_password)
-                    request.user.save()
-                    messages.success(request, 'Password updated successfully!')
-                    return redirect('core:signin')
+                if not request.user.check_password(new_password):
+                    if new_password == confirm_new_password:
+                        request.user.set_password(new_password)
+                        request.user.save()
+                        messages.success(request, 'Password updated successfully!')
+                        return redirect('core:signin')
+                    else:
+                        messages.error(request, 'Failed to update password. New password does not match.')
+                        return redirect('profile:change_password')
                 else:
-                    messages.error(request, 'Failed to update password. New password does not match.')
+                    messages.error(request, 'Failed to update password. New password cannot be the old password.')
                     return redirect('profile:change_password')
             else:
                 messages.error(request, 'Failed to update password. Old password does not match.')
