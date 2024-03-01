@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'credit',
     'customer',
     'user_profile',
+    'address',
 ]
 
 MIDDLEWARE = [
