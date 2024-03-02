@@ -57,3 +57,15 @@ def delete_region(request, region_primary_key):
     region.delete()
     messages.success(request, 'Success! The region has been successfully deleted!')
     return redirect('region:view_region')
+
+@login_required
+def view_province(request):
+    query = request.GET.get('query', '')
+    provinces = Province.objects.all()
+
+    if query:
+        provinces = provinces.filter(Q(name__icontains=query) | Q(province_code__icontains=query) | Q(psgc_code__icontains=query))
+    return render(request, 'address/province.html', {
+        'title': 'Province',
+        'provinces': provinces,
+    })
