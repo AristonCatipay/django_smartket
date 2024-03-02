@@ -50,3 +50,10 @@ def update_region(request, primary_key):
         'title': 'Edit Region',
         'form': form,
     })
+
+@login_required
+def delete_region(request, region_primary_key):
+    region = get_object_or_404(Region, pk=region_primary_key)
+    region.delete()
+    messages.success(request, 'Success! The region has been successfully deleted!')
+    return redirect('region:view_region')
