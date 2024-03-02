@@ -69,3 +69,19 @@ def view_province(request):
         'title': 'Province',
         'provinces': provinces,
     })
+
+@login_required
+def create_province(request):
+    if request.method == 'POST':
+        form = ProvinceForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successful! Province has been saved.')
+    else:
+        form = ProvinceForm()
+    
+    return render(request, 'address/form.html', {
+        'title': 'Create New Province',
+        'form': form,
+    })
