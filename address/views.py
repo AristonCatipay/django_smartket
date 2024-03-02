@@ -103,3 +103,10 @@ def update_province(request, primary_key):
         'title': 'Edit Province',
         'form': form,
     })
+
+@login_required
+def delete_province(request, province_primary_key):
+    province = get_object_or_404(Province, pk=province_primary_key)
+    province.delete()
+    messages.success(request, 'Success! The province has been successfully deleted!')
+    return redirect('address:view_province')
