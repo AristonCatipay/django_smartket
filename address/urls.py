@@ -10,4 +10,5 @@ urlpatterns = [
     path('region/delete/<int:region_primary_key>/', views.delete_region, name='delete_region'),
     path('province/', views.view_province, name='view_province'),
     path('province/create/', views.create_province, name='create_province'),
+    path('province/update/<int:primary_key>/', views.update_province, name='update_province'),
 ]
