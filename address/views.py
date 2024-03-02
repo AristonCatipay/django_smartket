@@ -16,3 +16,19 @@ def view_region(request):
         'title': 'Region',
         'regions': regions,
     })
+
+@login_required
+def create_region(request):
+    if request.method == 'POST':
+        form = RegionForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successful! Region has been saved.')
+    else:
+        form = RegionForm()
+    
+    return render(request, 'address/form.html', {
+        'title': 'Create New Region',
+        'form': form,
+    })
