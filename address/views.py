@@ -122,3 +122,19 @@ def view_city_municipality(request):
         'title': 'Province',
         'city_or_municipalities': city_or_municipalities,
     })
+
+@login_required
+def create_city_municipality(request):
+    if request.method == 'POST':
+        form = CityMunicipalityForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successful! City Municipality has been saved.')
+    else:
+        form = CityMunicipalityForm()
+    
+    return render(request, 'address/form.html', {
+        'title': 'Create New City Municipality',
+        'form': form,
+    })
