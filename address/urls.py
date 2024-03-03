@@ -15,4 +15,5 @@ urlpatterns = [
     path('city/', views.view_city_municipality, name='view_city_municipality'),
     path('city/create/', views.create_city_municipality, name='create_city_municipality'),
     path('city/update/<int:primary_key>/', views.update_city_municipality, name='update_city_municipality'),
+    path('city/delete/<int:city_municipality_primary_key>/', views.delete_city_municipality, name='delete_city_municipality'),
 ]
