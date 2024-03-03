@@ -110,3 +110,15 @@ def delete_province(request, province_primary_key):
     province.delete()
     messages.success(request, 'Success! The province has been successfully deleted!')
     return redirect('address:view_province')
+
+@login_required
+def view_city_municipality(request):
+    query = request.GET.get('query', '')
+    city_or_municipalities = City_Municipality.objects.all()
+
+    if query:
+        city_or_municipalities = city_or_municipalities.filter(Q(name__icontains=query) | Q(city_municipality_code__icontains=query) | Q(psgc_code__icontains=query))
+    return render(request, 'address/city_municipality.html', {
+        'title': 'Province',
+        'city_or_municipalities': city_or_municipalities,
+    })

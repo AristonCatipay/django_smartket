@@ -12,4 +12,5 @@ urlpatterns = [
     path('province/create/', views.create_province, name='create_province'),
     path('province/update/<int:primary_key>/', views.update_province, name='update_province'),
     path('province/delete/<int:province_primary_key>/', views.delete_province, name='delete_province'),
+    path('city/', views.view_city_municipality, name='view_city_municipality'),
 ]
