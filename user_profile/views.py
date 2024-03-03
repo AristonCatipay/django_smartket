@@ -39,7 +39,7 @@ def edit(request):
     })
 
 @login_required
-def change_password(request):
+def update_password(request):
     if request.method == 'POST':
         try:
             old_password = request.POST['old_password'] 
@@ -65,6 +65,6 @@ def change_password(request):
         except Exception as e:
             messages.error(request, f'Failed to update password. {e}')
 
-    return render(request, 'user_profile/change_password.html', {
+    return render(request, 'user_profile/update_password.html', {
         'title': 'Change Password',
     })
