@@ -9,7 +9,7 @@ def view_profile(request):
     })
 
 @login_required
-def edit(request):
+def update_profile(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -32,9 +32,9 @@ def edit(request):
         request.user.email = email
         request.user.save()
         messages.success(request, "Profile updated successfully! Your changes have been saved.")
-        return redirect('profile:edit')
+        return redirect('profile:update_profile')
 
-    return render(request, 'user_profile/edit.html', {
+    return render(request, 'user_profile/update_profile.html', {
         'title': 'Edit Profile',
     })
 
