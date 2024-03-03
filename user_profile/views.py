@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 @login_required
-def index(request):
-    return render(request, 'user_profile/index.html', {
+def view_profile(request):
+    return render(request, 'user_profile/view_profile.html', {
         'title': 'Profile',
     })
 
@@ -55,13 +55,13 @@ def update_password(request):
                         return redirect('core:signin')
                     else:
                         messages.error(request, 'Failed to update password. New password does not match.')
-                        return redirect('profile:change_password')
+                        return redirect('profile:update_password')
                 else:
                     messages.error(request, 'Failed to update password. New password cannot be the old password.')
-                    return redirect('profile:change_password')
+                    return redirect('profile:update_password')
             else:
                 messages.error(request, 'Failed to update password. Old password does not match.')
-                return redirect('profile:change_password')
+                return redirect('profile:update_password')
         except Exception as e:
             messages.error(request, f'Failed to update password. {e}')
 
