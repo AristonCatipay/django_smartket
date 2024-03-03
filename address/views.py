@@ -110,3 +110,109 @@ def delete_province(request, province_primary_key):
     province.delete()
     messages.success(request, 'Success! The province has been successfully deleted!')
     return redirect('address:view_province')
+
+@login_required
+def view_city_municipality(request):
+    query = request.GET.get('query', '')
+    city_or_municipalities = City_Municipality.objects.all()
+
+    if query:
+        city_or_municipalities = city_or_municipalities.filter(Q(name__icontains=query) | Q(city_municipality_code__icontains=query) | Q(psgc_code__icontains=query))
+    return render(request, 'address/city_municipality.html', {
+        'title': 'Province',
+        'city_or_municipalities': city_or_municipalities,
+    })
+
+@login_required
+def create_city_municipality(request):
+    if request.method == 'POST':
+        form = CityMunicipalityForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successful! City Municipality has been saved.')
+    else:
+        form = CityMunicipalityForm()
+    
+    return render(request, 'address/form.html', {
+        'title': 'Create New City Municipality',
+        'form': form,
+    })
+
+@login_required
+def update_city_municipality(request, primary_key):
+    city_municipality = get_object_or_404(City_Municipality, id = primary_key)
+
+    if request.method == 'POST':
+        form = CityMunicipalityForm(request.POST, instance=city_municipality)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successful! City Municipality has been updated.')
+    else: 
+        form = CityMunicipalityForm(instance=city_municipality)
+
+    return render(request, 'address/form.html', {
+        'title': 'Edit City Municipality',
+        'form': form,
+    })
+
+@login_required
+def delete_city_municipality(request, city_municipality_primary_key):
+    city_municipality = get_object_or_404(City_Municipality, pk=city_municipality_primary_key)
+    city_municipality.delete()
+    messages.success(request, 'Success! The city_municipality has been successfully deleted!')
+    return redirect('province:view_city_municipality')
+
+@login_required
+def view_barangay(request):
+    query = request.GET.get('query', '')
+    barangays = Barangay.objects.all()
+
+    if query:
+        barangays = barangays.filter(Q(name__icontains=query) | Q(barangay_code__icontains=query) | Q(psgc_code__icontains=query))
+    return render(request, 'address/barangay.html', {
+        'title': 'Province',
+        'barangays': barangays,
+    })
+
+@login_required
+def create_barangay(request):
+    if request.method == 'POST':
+        form = BarangayForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successful! Barangay has been saved.')
+    else:
+        form = BarangayForm()
+    
+    return render(request, 'address/form.html', {
+        'title': 'Create New Barangay',
+        'form': form,
+    })
+
+@login_required
+def update_barangay(request, primary_key):
+    barangay = get_object_or_404(Barangay, id = primary_key)
+
+    if request.method == 'POST':
+        form = BarangayForm(request.POST, instance=barangay)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successful! Barangay has been updated.')
+    else: 
+        form = BarangayForm(instance=barangay)
+
+    return render(request, 'address/form.html', {
+        'title': 'Edit Barangay',
+        'form': form,
+    })
+
+@login_required
+def delete_barangay(request, barangay_primary_key):
+    barangay = get_object_or_404(Barangay, pk=barangay_primary_key)
+    barangay.delete()
+    messages.success(request, 'Success! The barangay has been successfully deleted!')
+    return redirect('address:view_barangay')

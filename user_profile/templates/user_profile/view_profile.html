@@ -14,10 +14,13 @@
             <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                 <ul class="py-2" aria-labelledby="dropdownButton">
                     <li>
-                        <a href="{% url 'profile:edit' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                        <a href="{% url 'profile:update_profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Update Profile</a>
                     </li>
                     <li>
-                        <a href="{% url 'profile:change_password' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Change Password</a>
+                        <a href="{% url 'profile:update_address' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Update Address</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'profile:update_password' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Update Password</a>
                     </li>
                 </ul>
             </div>
@@ -39,6 +42,16 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 2-8.4 7.05a1 1 0 0 1-1.2 0L1 2m18 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1m18 0v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2"/>
                 </svg>
                 <p class="mb-4 text-sm dark:text-white">{{ user.email }}</p>
+            </div>
+            <div class="flex flex-row">
+                <svg class="w-4 h-4 mt-0.5 mr-1 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                    <path d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                </svg>
+                {% if user.profile.location %}
+                    <span class="mb-4 text-sm dark:text-white">{{ user.profile.location }}, {{ user.profile.barangay }}, {{ user.profile.city_municipality }}, {{ user.profile.province }}, {{ user.profile.region }}</span>
+                {% else %}
+                    <span class="mb-4 text-sm dark:text-white">Location not available.</span>
+                {% endif %}
             </div>
         </div>
     </div>
