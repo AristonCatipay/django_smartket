@@ -16,6 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# Imports for showing images.
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('__reload__/', include('django_browser_reload.urls')),
@@ -27,4 +30,4 @@ urlpatterns = [
     path('number/', include('number.urls')),  
     path('credit/', include('credit.urls')),  
     path('customer/', include('customer.urls')),  
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
