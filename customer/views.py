@@ -51,9 +51,9 @@ def update_customer(request, customer_primary_key):
     })
 
 @login_required
-def delete_customer(request, primary_key):
+def delete_customer(request, customer_primary_key):
     is_delete = True
-    customer = get_object_or_404(Customer, id=primary_key)
+    customer = get_object_or_404(Customer, id=customer_primary_key)
     if request.method == 'POST':
         form = CustomerForm(request.POST, instance=customer)
         customer.delete()
