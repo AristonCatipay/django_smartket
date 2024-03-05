@@ -15,16 +15,20 @@ class CustomerForm(forms.ModelForm):
                   'street', 'barangay', 'city', 'birth_date')
         widgets = {
             'first_name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': 'John'
             }),
             'last_name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': 'Doe'
             }), 
             'username': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': 'john.doe'
             }),
             'age': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': '30'
             }),
             'gender': forms.Select(attrs={
                 'class': SELECT_AREA
@@ -33,16 +37,20 @@ class CustomerForm(forms.ModelForm):
                 'class': SELECT_AREA
             }),
             'email': forms.EmailInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': 'john.doe30@gmail.com'
             }),
             'street': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': 'BLK 1 LOT 2, Test Village'
             }),
             'barangay': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': 'Great Barangay'
             }),
             'city': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': 'Great City'
             }),
             'birth_date': forms.SelectDateWidget(years=range(1900, 2999), attrs={
                 'class': SELECT_AREA,
