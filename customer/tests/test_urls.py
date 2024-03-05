@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
 from customer.models import Customer
-from customer.views import index, add_customer, edit_customer, delete_customer
+from customer.views import view_customer, add_customer, edit_customer, delete_customer
 
 class TestUrls(TestCase):
     @classmethod
@@ -33,7 +33,7 @@ class TestUrls(TestCase):
 
     def test_index_url(self):
         url = reverse('customer:index')
-        self.assertEqual(resolve(url).func, index)
+        self.assertEqual(resolve(url).func, view_customer)
     
     def test_add_customer_url(self):
         url = reverse('customer:add_customer')

@@ -6,14 +6,14 @@ from . forms import CustomerForm
 from . models import Customer
 
 @login_required
-def index(request):
+def view_customer(request):
     query = request.GET.get('query', '')
     customers = Customer.objects.all()
 
     if query:
         customers = customers.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
 
-    return render(request, 'customer/index.html', {
+    return render(request, 'customer/view_customer.html', {
         'title': 'Customer',
         'customers': customers,
     })
