@@ -19,14 +19,14 @@ def view_customer(request):
     })
 
 @login_required
-def add_customer(request):
+def create_customer(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
 
         if form.is_valid():
             form.save()
             messages.success('Successful! Customer details has been created.')
-            return redirect('customer:index')
+            return redirect('customer:view_customer')
     else:
         form = CustomerForm()
     return render(request, 'customer/form.html', {
@@ -42,7 +42,7 @@ def edit_customer(request, primary_key):
         if form.is_valid():
             form.save()
             messages.success('Successful! Customer details has been edited.')
-            return redirect('customer:index')
+            return redirect('customer:view_customer')
     else:
         form = CustomerForm(instance=customer)
     return render(request, 'customer/form.html', {
@@ -58,7 +58,7 @@ def delete_customer(request, primary_key):
         form = CustomerForm(request.POST, instance=customer)
         customer.delete()
         messages.success('Successful! Customer details has been deleted.')
-        return redirect('customer:index')
+        return redirect('customer:view_customer')
     else:
         form = CustomerForm(instance=customer)
     return render(request, 'customer/form.html', {
