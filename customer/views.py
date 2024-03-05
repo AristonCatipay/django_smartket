@@ -35,8 +35,8 @@ def create_customer(request):
     })
 
 @login_required
-def edit_customer(request, primary_key):
-    customer = get_object_or_404(Customer, id=primary_key)
+def update_customer(request, customer_primary_key):
+    customer = get_object_or_404(Customer, id=customer_primary_key)
     if request.method == 'POST':
         form = CustomerForm(request.POST, instance=customer)
         if form.is_valid():
