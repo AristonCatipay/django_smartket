@@ -195,9 +195,9 @@ def delete_category(request, category_primary_key):
     })
 
 @login_required
-def color(request):
+def view_color(request):
     colors = Color.objects.all()
-    return render(request, 'product/color.html', {
+    return render(request, 'product/view_color.html', {
         'title': 'Colors',
         'colors': colors,
     })

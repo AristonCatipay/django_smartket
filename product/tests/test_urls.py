@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from customer.models import Customer
 from product.models import Product, Color, Category, Size, Metric_Unit
-from product.views import index, create_product, update_product, delete_product, view_metric, create_metric, update_metric, delete_metric, category, create_category, update_category, delete_category, color, add_color, edit_color, delete_color, size, add_size, edit_size, delete_size
+from product.views import index, create_product, update_product, delete_product, view_metric, create_metric, update_metric, delete_metric, category, create_category, update_category, delete_category, view_color, add_color, edit_color, delete_color, size, add_size, edit_size, delete_size
 
 class TestUrls(TestCase):
     @classmethod
@@ -119,7 +119,7 @@ class TestUrls(TestCase):
 
     def test_color_url(self):
         url = reverse('product:color')
-        self.assertEqual(resolve(url).func, color)
+        self.assertEqual(resolve(url).func, view_color)
 
     def test_add_color_url(self):
         url = reverse('product:add_color')
