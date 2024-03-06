@@ -223,7 +223,7 @@ def update_color(request, color_primary_key):
     if request.method == 'POST':
         form = ColorForm(request.POST, instance=color)
         if form.is_valid():
-            form.save()
+            form.save() 
             messages.success(request, 'Successful! Product color has been edited.')
             return redirect('product:view_color')
     else:
@@ -254,7 +254,7 @@ def delete_color(request, color_primary_key):
     })
 
 @login_required
-def size(request):
+def view_size(request):
     sizes = Size.objects.all()
     return render(request, 'product/size.html', {
         'title': 'Sizes',
