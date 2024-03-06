@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from customer.models import Customer
 from product.models import Product, Color, Category, Size, Metric_Unit
-from product.views import index, create_product, update_product, delete_product, view_metric, create_metric, update_metric, delete_metric, category, create_category, update_category, delete_category, view_color, create_color, update_color, delete_color, view_size, add_size, edit_size, delete_size
+from product.views import index, create_product, update_product, delete_product, view_metric, create_metric, update_metric, delete_metric, category, create_category, update_category, delete_category, view_color, create_color, update_color, delete_color, view_size, create_size, edit_size, delete_size
 
 class TestUrls(TestCase):
     @classmethod
@@ -141,7 +141,7 @@ class TestUrls(TestCase):
     
     def test_add_size_url(self):
         url = reverse('product:add_size')
-        self.assertEquals(resolve(url).func, add_size)
+        self.assertEquals(resolve(url).func, create_size)
 
     def test_edit_size_url(self):
         size = self.create_test_size()

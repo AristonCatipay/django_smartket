@@ -262,7 +262,7 @@ def view_size(request):
     })
 
 @login_required
-def add_size(request):
+def create_size(request):
     if request.method == 'POST':
         form = SizeForm(request.POST)
         if form.is_valid():
