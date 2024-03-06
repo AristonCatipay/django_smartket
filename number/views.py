@@ -5,26 +5,26 @@ from . forms import CustomerNumberForm
 from . models import Number
 
 @login_required
-def index(request):
+def view_number(request):
     query = request.GET.get('query', '')
     customer_numbers = Number.objects.all()
 
     if query:
         customer_numbers = customer_numbers.filter(number__icontains=query)
-    return render(request, 'number/index.html', {
+    return render(request, 'number/view_number.html', {
         'title': 'Customer Number',
         'customer_numbers': customer_numbers
     })
 
 @login_required
-def add_customer_number(request):
+def create_customer_number(request):
     if request.method == 'POST':
         form = CustomerNumberForm(request.POST)
 
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Customer number has been saved.')
-            return redirect('number:index')
+            return redirect('number:view_number')
     else:
         form = CustomerNumberForm()
     return render(request, 'number/form.html', {
@@ -33,7 +33,7 @@ def add_customer_number(request):
     })
 
 @login_required
-def edit_customer_number(request, primary_key):
+def update_customer_number(request, primary_key):
     number_id = get_object_or_404(Number, id=primary_key)
     if request.method == 'POST':
         form = CustomerNumberForm(request.POST, instance=number_id)
@@ -41,7 +41,7 @@ def edit_customer_number(request, primary_key):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Customer number has been edited.')
-            return redirect('number:index')
+            return redirect('number:view_number')
     else:
         form = CustomerNumberForm(instance=number_id)
     return render(request, 'number/form.html', {
@@ -57,7 +57,7 @@ def delete_customer_number(request ,primary_key):
         form = CustomerNumberForm(request.POST, instance=customer_number)
         customer_number.delete()
         messages.success(request, 'Successful! Customer number has been deleted.')
-        return redirect('number:index')
+        return redirect('number:view_number')
     else: 
         form = CustomerNumberForm(instance=customer_number)
     return render(request, 'number/form.html', {

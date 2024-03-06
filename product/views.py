@@ -5,7 +5,7 @@ from . forms import ProductForm, MetricUnitForm, CategoryForm, ColorForm, SizeFo
 from . models import Product, Metric_Unit, Category, Color, Size
 
 @login_required
-def index(request):
+def view_product(request):
     query = request.GET.get('query', '')
     category_id = request.GET.get('category', 0)
     categories = Category.objects.all()
@@ -17,7 +17,7 @@ def index(request):
     if category_id:
         products = products.filter(product_category = category_id)
 
-    return render(request, 'product/index.html', {
+    return render(request, 'product/view_product.html', {
         'title': 'Product',
         'products': products,
         'query': query,
@@ -26,14 +26,14 @@ def index(request):
     })
 
 @login_required
-def add_product(request):
+def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
         
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product details has been created.')
-            return redirect('product:index')
+            return redirect('product:view_product')
     else:
         form = ProductForm()
     return render(request, 'product/form.html', {
@@ -49,7 +49,7 @@ def edit_product(request, product_primary_key):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product details has been edited.')
-            return redirect('product:index')
+            return redirect('product:view_product')
     else:
         form = ProductForm(instance=product)
     return render(request, 'product/form.html', {
@@ -66,7 +66,7 @@ def delete_product(request, product_primary_key):
         form = ProductForm(request.POST, instance=product)
         product.delete()
         messages.success(request, 'Successful! Product details has been deleted.')
-        return redirect('product:index')
+        return redirect('product:view_product')
     else:
         form = ProductForm(instance=product)
     return render(request, 'product/form.html', {

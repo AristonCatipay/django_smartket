@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
-from credit.views import index, add_credit_transaction, edit_credit_transaction, mark_transaction_as_paid, credit_product, add_credit_product, edit_credit_product 
+from credit.views import index, create_credit_transaction, update_credit_transaction, mark_transaction_as_paid, credit_product, create_credit_product, update_credit_product 
 from credit.models import Credit_Transaction
 from customer.models import Customer
 from product.models import Product, Metric_Unit, Size, Category, Color
@@ -83,12 +83,12 @@ class TestUrls(TestCase):
     
     def test_add_credit_transaction_url(self):
         url = reverse('credit:add_credit_transaction')
-        self.assertEquals(resolve(url).func, add_credit_transaction)
+        self.assertEquals(resolve(url).func, create_credit_transaction)
 
     def test_edit_credit_transaction_url(self):
         credit_transaction = self.create_test_credit_transaction()
         url = reverse('credit:edit_credit_transaction', args=[credit_transaction.pk])
-        self.assertEquals(resolve(url).func, edit_credit_transaction)
+        self.assertEquals(resolve(url).func, update_credit_transaction)
 
     def test_mark_transaction_as_paid_url(self):
         credit_transaction = self.create_test_credit_transaction()
@@ -103,7 +103,7 @@ class TestUrls(TestCase):
     def test_add_credit_product_url(self):
         credit_transaction = self.create_test_credit_transaction()
         url = reverse('credit:add_credit_product', args=[credit_transaction.pk])
-        self.assertEquals(resolve(url).func, add_credit_product)
+        self.assertEquals(resolve(url).func, create_credit_product)
 
     def test_edit_credit_product_url(self):
         credit_transaction = self.create_test_credit_transaction()
@@ -112,4 +112,4 @@ class TestUrls(TestCase):
 
         self.assertIsNotNone(credit_transaction)
         self.assertIsNotNone(credit_product)
-        self.assertEqual(resolve(url).func, edit_credit_product)
+        self.assertEqual(resolve(url).func, update_credit_product)
