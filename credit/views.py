@@ -7,13 +7,13 @@ from .models import Credit_Transaction, Credit_Transaction_Item
 from .forms import CreditTransactionForm, CreditTransactionItemForm
 
 @login_required
-def index(request):
+def view_credit_transaction(request):
     query = request.GET.get('query', '')
     credit_transactions = Credit_Transaction.objects.all()
     
     if query:
         credit_transactions = credit_transactions.filter(Q(customer__first_name__icontains=query) | Q(customer__last_name__icontains=query))
-    return render(request, 'credit/index.html', {
+    return render(request, 'credit/view_credit_transaction.html', {
         'title': 'Credit',
         'credit_transactions': credit_transactions,
     })
@@ -27,7 +27,7 @@ def add_credit_transaction(request):
             credit_transaction.created_by = request.user
             credit_transaction.save()
             messages.success('Successful! Credit transaction has been created.')
-            return redirect('credit:index')
+            return redirect('credit:view_credit_transaction')
     else:
         form = CreditTransactionForm()
     return render(request, 'credit/form.html', {
@@ -43,7 +43,7 @@ def edit_credit_transaction(request, credit_transaction_primary_key):
         if form.is_valid():
             form.save()
             messages.success('Successful! Credit transaction has been edited.')
-            return redirect('credit:index')
+            return redirect('credit:view_credit_transaction')
     else:
         form = CreditTransactionForm(instance=credit_transaction)
     return render(request, 'credit/form.html', {
