@@ -17,7 +17,7 @@ def view_number(request):
     })
 
 @login_required
-def add_customer_number(request):
+def create_customer_number(request):
     if request.method == 'POST':
         form = CustomerNumberForm(request.POST)
 

@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from customer.models import Customer
 from number.models import Number
-from number.views import view_number, add_customer_number, edit_customer_number, delete_customer_number
+from number.views import view_number, create_customer_number, edit_customer_number, delete_customer_number
 
 class TestUrls(TestCase):
     @classmethod
@@ -45,7 +45,7 @@ class TestUrls(TestCase):
     
     def test_add_customer_number_url(self):
         url = reverse('number:add_customer_number')
-        self.assertEqual(resolve(url).func, add_customer_number)
+        self.assertEqual(resolve(url).func, create_customer_number)
 
     def test_edit_customer_number_url(self):
         number = self.create_test_customer_number()
