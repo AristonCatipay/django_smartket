@@ -58,7 +58,7 @@ def mark_transaction_as_paid(request, credit_transaction_primary_key):
     if not credit_transaction.is_paid:
         credit_transaction.mark_as_paid()
         credit_transaction.save()
-        messages.success('Successful! Credit transaction has been marked as paid.')
+        messages.success(request, 'Successful! Credit transaction has been marked as paid.')
     
     return redirect('credit:view_credit_transaction')
 
