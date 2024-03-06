@@ -33,7 +33,7 @@ def create_customer_number(request):
     })
 
 @login_required
-def edit_customer_number(request, primary_key):
+def update_customer_number(request, primary_key):
     number_id = get_object_or_404(Number, id=primary_key)
     if request.method == 'POST':
         form = CustomerNumberForm(request.POST, instance=number_id)
