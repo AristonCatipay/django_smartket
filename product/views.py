@@ -42,7 +42,7 @@ def create_product(request):
     })
 
 @login_required
-def edit_product(request, product_primary_key):
+def update_product(request, product_primary_key):
     product = get_object_or_404(Product, id=product_primary_key)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
