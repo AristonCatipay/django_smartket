@@ -79,7 +79,7 @@ def delete_product(request, product_primary_key):
 @login_required
 def view_metric(request):
     metric_units = Metric_Unit.objects.all()
-    return render(request, 'product/metric.html', {
+    return render(request, 'product/view_metric.html', {
         'title': 'Metric',
         'metric_units': metric_units,
     })
@@ -256,7 +256,7 @@ def delete_color(request, color_primary_key):
 @login_required
 def view_size(request):
     sizes = Size.objects.all()
-    return render(request, 'product/size.html', {
+    return render(request, 'product/view_size.html', {
         'title': 'Sizes',
         'sizes': sizes,
     })
@@ -268,7 +268,7 @@ def create_size(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product size has been added.')
-            return redirect('product:size')
+            return redirect('product:view_size')
     else:
         form = SizeForm()
     return render(request, 'product/form.html', {
@@ -277,14 +277,14 @@ def create_size(request):
     })
 
 @login_required
-def edit_size(request, size_primary_key):
+def update_size(request, size_primary_key):
     size = get_object_or_404(Size, id=size_primary_key)
     if request.method == 'POST':
         form = SizeForm(request.POST, instance=size)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product size has been edited.')
-            return redirect('product:size')
+            return redirect('product:view_size')
     else:
         form = SizeForm(instance=size)
     
@@ -302,7 +302,7 @@ def delete_size(request, size_primary_key):
         form = SizeForm(request.POST, instance=size)
         size.delete()
         messages.success(request, 'Successful! Product size has been deleted.')
-        return redirect('product:size')
+        return redirect('product:view_size')
     else:
         form = SizeForm(instance=size)
     return render(request ,'product/form.html', {
