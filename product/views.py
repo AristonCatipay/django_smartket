@@ -26,7 +26,7 @@ def view_product(request):
     })
 
 @login_required
-def add_product(request):
+def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
         

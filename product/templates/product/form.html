@@ -8,15 +8,19 @@
     <div class="max-w-screen-xl mx-auto">
         <!-- Row -->
         <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
-            <div class="px-4 py-8 bg-gray-50 text-gray-500 sm:text-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 rounded-lg">
+            <div
+                class="px-4 py-8 bg-gray-50 text-gray-500 sm:text-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 rounded-lg">
                 <h5 class="mb-6 text-xl font-medium text-gray-900 dark:text-white">{{ title }}</h5>
                 <form action="." method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-        
+
                     {% if is_delete == True %}
-                    <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                        <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                        role="alert">
+                        <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                         </svg>
                         <span class="sr-only">Info</span>
                         <div>
@@ -25,101 +29,142 @@
                         </div>
                     </div>
                     {% endif %}
-        
+
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         {% for field in form %}
-        
-                            {% if field.name == 'product_name' %}
-                                <div class="col-span-2">
-                                    <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                                    <div class="flex">
-                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                                            <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
-                                        </svg>
-                                        </span>
-                                        {{ field }}
-                                    </div>
-                                </div>
-                            {% endif %}
-        
-                            {% if field.name == 'product_price' %}
-                            <div>
-                                <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                                <div class="flex">
-                                    <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1M2 5h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
-                                    </svg>
-                                    </span>
-                                    {{ field }}
-                                </div>
-                            </div>
-                            {% endif %}
-        
-                            {% if field.name == 'metric_number' %}
-                            <div>
-                                <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                                <div class="flex">
-                                    <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M18 12h-1v4a1 1 0 0 1-2 0v-4h-1v4a1 1 0 0 1-2 0v-4h-1v4a1 1 0 0 1-2 0v-4H8v-1H4a1 1 0 0 1 0-2h4V7.961A.977.977 0 0 1 7.8 8H4a1 1 0 0 1 0-2h3.805c.068.006.135.02.2.039V5H4a1 1 0 0 1 0-2h4V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v17a1 1 0 0 0 1 1h17a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2ZM4.5 17a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/>
-                                    </svg>
-                                    </span>
-                                    {{ field }}
-                                </div>
-                            </div>
-                            {% endif %}
-                            
-                            {% if field.name == 'metric_unit' %}
-                            <div>
-                                <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                                {{ field }}
-                            </div>
-                            {% endif %}
-        
-                            {% if field.name == 'product_color' %}
-                            <div>
-                                <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                                {{ field }}
-                            </div>
-                            {% endif %}
-        
-                            {% if field.name == 'product_category' %}
-                            <div>
-                                <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                                {{ field }}
-                            </div>
-                            {% endif %}
-        
-                            {% if field.name == 'product_size' %}
-                            <div>
-                                <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                                {{ field }}
-                            </div>
-                            {% endif %}
 
-                            {% if field.name == 'name' %}
-                                <div class="col-span-2">
-                                    <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-                                    <div class="flex">
-                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 14h6m-3 3v-6M1.857 1h4.286c.473 0 .857.384.857.857v4.286A.857.857 0 0 1 6.143 7H1.857A.857.857 0 0 1 1 6.143V1.857C1 1.384 1.384 1 1.857 1Zm10 0h4.286c.473 0 .857.384.857.857v4.286a.857.857 0 0 1-.857.857h-4.286A.857.857 0 0 1 11 6.143V1.857c0-.473.384-.857.857-.857Zm-10 10h4.286c.473 0 .857.384.857.857v4.286a.857.857 0 0 1-.857.857H1.857A.857.857 0 0 1 1 16.143v-4.286c0-.473.384-.857.857-.857Z"/>
-                                        </svg>
-                                        </span>
-                                        {{ field }}
-                                    </div>
-                                </div>
-                            {% endif %}
+                        {% if field.name == 'product_name' %}
+                        <div class="col-span-2">
+                            <label for="{{ field.id_for_label }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                {{ field.label}}
+                            </label>
+                            <div class="flex">
+                                <span
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                        <path
+                                            d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
+                                    </svg>
+                                </span>
+                                {{ field }}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if field.name == 'product_price' %}
+                        <div>
+                            <label for="{{ field.id_for_label }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                {{ field.label}}
+                            </label>
+                            <div class="flex">
+                                <span
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M5 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1M2 5h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
+                                    </svg>
+                                </span>
+                                {{ field }}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if field.name == 'metric_number' %}
+                        <div>
+                            <label for="{{ field.id_for_label }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                {{ field.label}}
+                            </label>
+                            <div class="flex">
+                                <span
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M18 12h-1v4a1 1 0 0 1-2 0v-4h-1v4a1 1 0 0 1-2 0v-4h-1v4a1 1 0 0 1-2 0v-4H8v-1H4a1 1 0 0 1 0-2h4V7.961A.977.977 0 0 1 7.8 8H4a1 1 0 0 1 0-2h3.805c.068.006.135.02.2.039V5H4a1 1 0 0 1 0-2h4V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v17a1 1 0 0 0 1 1h17a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2ZM4.5 17a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" />
+                                    </svg>
+                                </span>
+                                {{ field }}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if field.name == 'metric_unit' %}
+                        <div>
+                            <label for="{{ field.id_for_label }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                {{ field.label}}
+                            </label>
+                            {{ field }}
+                        </div>
+                        {% endif %}
+
+                        {% if field.name == 'product_color' %}
+                        <div>
+                            <label for="{{ field.id_for_label }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                {{ field.label}}
+                            </label>
+                            {{ field }}
+                        </div>
+                        {% endif %}
+
+                        {% if field.name == 'product_category' %}
+                        <div>
+                            <label for="{{ field.id_for_label }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                {{ field.label}}
+                            </label>
+                            {{ field }}
+                        </div>
+                        {% endif %}
+
+                        {% if field.name == 'product_size' %}
+                        <div>
+                            <label for="{{ field.id_for_label }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                {{ field.label}}
+                            </label>
+                            {{ field }}
+                        </div>
+                        {% endif %}
+
+                        {% if field.name == 'name' %}
+                        <div class="col-span-2">
+                            <label for="{{ field.id_for_label }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                {{ field.label}}
+                            </label>
+                            <div class="flex">
+                                <span
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M11 14h6m-3 3v-6M1.857 1h4.286c.473 0 .857.384.857.857v4.286A.857.857 0 0 1 6.143 7H1.857A.857.857 0 0 1 1 6.143V1.857C1 1.384 1.384 1 1.857 1Zm10 0h4.286c.473 0 .857.384.857.857v4.286a.857.857 0 0 1-.857.857h-4.286A.857.857 0 0 1 11 6.143V1.857c0-.473.384-.857.857-.857Zm-10 10h4.286c.473 0 .857.384.857.857v4.286a.857.857 0 0 1-.857.857H1.857A.857.857 0 0 1 1 16.143v-4.286c0-.473.384-.857.857-.857Z" />
+                                    </svg>
+                                </span>
+                                {{ field }}
+                            </div>
+                        </div>
+                        {% endif %}
 
                         {% endfor %}
-                        <button type="submit" class="mt-4 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-200 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-2 mb-2">Submit</button>
-                        <a href="{% url 'product:index' %}" class="mt-4 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-200 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-2 mb-2">Cancel</a>
+                        <button type="submit"
+                            class="mt-4 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-200 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-2 mb-2">Submit</button>
+                        <a href="{% url 'product:create_product' %}"
+                            class="mt-4 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-200 font-medium rounded-lg text-base px-5 py-2.5 text-center mr-2 mb-2">Cancel</a>
                     </div>
                 </form>
             </div>
-            <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="{% static 'product-presentation.svg' %}" alt="dashboard feature image">
+            <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="{% static 'product-presentation.svg' %}"
+                alt="dashboard feature image">
         </div>
     </div>
 </section>
