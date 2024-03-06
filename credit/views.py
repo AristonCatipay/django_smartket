@@ -36,13 +36,13 @@ def create_credit_transaction(request):
     })
 
 @login_required
-def edit_credit_transaction(request, credit_transaction_primary_key):
+def update_credit_transaction(request, credit_transaction_primary_key):
     credit_transaction = get_object_or_404(Credit_Transaction, pk=credit_transaction_primary_key)
     if request.method == 'POST':
         form = CreditTransactionForm(request.POST, instance=credit_transaction)
         if form.is_valid():
             form.save()
-            messages.success('Successful! Credit transaction has been edited.')
+            messages.success(request, 'Successful! Credit transaction has been edited.')
             return redirect('credit:view_credit_transaction')
     else:
         form = CreditTransactionForm(instance=credit_transaction)
