@@ -19,14 +19,14 @@ def view_credit_transaction(request):
     })
 
 @login_required
-def add_credit_transaction(request):
+def create_credit_transaction(request):
     if request.method == 'POST':
         form = CreditTransactionForm(request.POST)
         if form.is_valid():
             credit_transaction = form.save(commit=False)
             credit_transaction.created_by = request.user
             credit_transaction.save()
-            messages.success('Successful! Credit transaction has been created.')
+            messages.success(request, 'Successful! Credit transaction has been created.')
             return redirect('credit:view_credit_transaction')
     else:
         form = CreditTransactionForm()
@@ -60,7 +60,7 @@ def mark_transaction_as_paid(request, credit_transaction_primary_key):
         credit_transaction.save()
         messages.success('Successful! Credit transaction has been marked as paid.')
     
-    return redirect('credit:index')
+    return redirect('credit:view_credit_transaction')
 
 @login_required
 def credit_product(request, credit_transaction_primary_key):
