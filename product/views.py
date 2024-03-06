@@ -136,9 +136,9 @@ def delete_metric(request, metric_primary_key):
     })
 
 @login_required
-def category(request):
+def view_category(request):
     categories = Category.objects.all()
-    return render(request, 'product/category.html', {
+    return render(request, 'product/view_category.html', {
         'title': 'Category',
         'categories': categories,
     })
