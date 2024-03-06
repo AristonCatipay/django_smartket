@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
-from credit.views import index, create_credit_transaction, update_credit_transaction, mark_transaction_as_paid, credit_product, create_credit_product, edit_credit_product 
+from credit.views import index, create_credit_transaction, update_credit_transaction, mark_transaction_as_paid, credit_product, create_credit_product, update_credit_product 
 from credit.models import Credit_Transaction
 from customer.models import Customer
 from product.models import Product, Metric_Unit, Size, Category, Color
@@ -112,4 +112,4 @@ class TestUrls(TestCase):
 
         self.assertIsNotNone(credit_transaction)
         self.assertIsNotNone(credit_product)
-        self.assertEqual(resolve(url).func, edit_credit_product)
+        self.assertEqual(resolve(url).func, update_credit_product)

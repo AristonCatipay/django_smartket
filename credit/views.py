@@ -99,7 +99,7 @@ def create_credit_product(request, credit_transaction_primary_key):
     })
 
 @login_required
-def edit_credit_product(request, credit_product_primary_key, credit_transaction_primary_key):
+def update_credit_product(request, credit_product_primary_key, credit_transaction_primary_key):
     credit_product = get_object_or_404(Credit_Transaction_Item, pk=credit_product_primary_key)
     if request.method == 'POST':
         form = CreditTransactionItemForm(request.POST, instance=credit_product)
@@ -113,7 +113,7 @@ def edit_credit_product(request, credit_product_primary_key, credit_transaction_
             credit_product.product = product
             credit_product.product_current_price = product.product_price
             credit_product.save()
-            messages.success('Successful! Credit product has been edited.')
+            messages.success(request, 'Successful! Credit product has been edited.')
             return redirect('credit:view_credit_product', credit_transaction_primary_key)
     else:
         form = CreditTransactionItemForm(instance=credit_product)
