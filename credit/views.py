@@ -72,7 +72,7 @@ def view_credit_product(request, credit_transaction_primary_key):
     })
 
 @login_required
-def add_credit_product(request, credit_transaction_primary_key):
+def create_credit_product(request, credit_transaction_primary_key):
     if request.method == 'POST':
         form = CreditTransactionItemForm(request.POST)
         if form.is_valid():
@@ -89,8 +89,8 @@ def add_credit_product(request, credit_transaction_primary_key):
             credit_product.product_current_price = product.product_price
 
             credit_product.save()
-            messages.success('Successful! Credit product has been created.')
-            return redirect('credit:credit_product', credit_transaction_primary_key)
+            messages.success(request, 'Successful! Credit product has been created.')
+            return redirect('credit:view_credit_product', credit_transaction_primary_key)
     else:
         form = CreditTransactionItemForm()
     return render(request, 'credit/form.html', {
@@ -114,7 +114,7 @@ def edit_credit_product(request, credit_product_primary_key, credit_transaction_
             credit_product.product_current_price = product.product_price
             credit_product.save()
             messages.success('Successful! Credit product has been edited.')
-            return redirect('credit:credit_product', credit_transaction_primary_key)
+            return redirect('credit:view_credit_product', credit_transaction_primary_key)
     else:
         form = CreditTransactionItemForm(instance=credit_product)
     return render(request, 'credit/form.html', {
