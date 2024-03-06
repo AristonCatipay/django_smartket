@@ -85,13 +85,13 @@ def view_metric(request):
     })
 
 @login_required
-def add_metric(request):
+def create_metric(request):
     if request.method == 'POST':
         form = MetricUnitForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product metric has been added.')
-            return redirect('product:metric')
+            return redirect('product:view_metric')
     else:
         form = MetricUnitForm()
     return render(request, 'product/form.html', {
@@ -107,7 +107,7 @@ def edit_metric(request, metric_primary_key):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product metric has been edited.')
-            return redirect('product:metric')
+            return redirect('product:view_metric')
     else:
         form = MetricUnitForm(instance=metric)
     
@@ -125,7 +125,7 @@ def delete_metric(request, metric_primary_key):
         form = MetricUnitForm(request.POST, instance=metric)
         metric.delete()
         messages.success(request, 'Successful! Product metric has been deleted.')
-        return redirect('product:metric')
+        return redirect('product:view_metric')
     else:
         form = MetricUnitForm(instance=metric)
     return render(request ,'product/form.html', {
