@@ -218,7 +218,7 @@ def create_color(request):
     })
 
 @login_required
-def edit_color(request, color_primary_key):
+def update_color(request, color_primary_key):
     color = get_object_or_404(Color, id=color_primary_key)
     if request.method == 'POST':
         form = ColorForm(request.POST, instance=color)
