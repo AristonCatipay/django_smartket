@@ -203,13 +203,13 @@ def view_color(request):
     })
 
 @login_required
-def add_color(request):
+def create_color(request):
     if request.method == 'POST':
         form = ColorForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product color has been added.')
-            return redirect('product:color')
+            return redirect('product:view_color')
     else:
         form = ColorForm()
     return render(request, 'product/form.html', {
@@ -225,7 +225,7 @@ def edit_color(request, color_primary_key):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product color has been edited.')
-            return redirect('product:color')
+            return redirect('product:view_color')
     else:
         form = ColorForm(instance=color)
     
@@ -243,7 +243,7 @@ def delete_color(request, color_primary_key):
         form = ColorForm(request.POST, instance=color)
         color.delete()
         messages.success(request, 'Successful! Product color has been deleted.')
-        return redirect('product:color')
+        return redirect('product:view_color')
     else:
         form = ColorForm(instance=color)
     return render(request ,'product/form.html', {
