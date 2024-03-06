@@ -77,9 +77,9 @@ def delete_product(request, product_primary_key):
     })
 
 @login_required
-def metric(request):
+def view_metric(request):
     metric_units = Metric_Unit.objects.all()
-    return render(request, 'product/metric_unit.html', {
+    return render(request, 'product/metric.html', {
         'title': 'Metric',
         'metric_units': metric_units,
     })
