@@ -100,7 +100,7 @@ def create_metric(request):
     })
 
 @login_required
-def edit_metric(request, metric_primary_key):
+def update_metric(request, metric_primary_key):
     metric = get_object_or_404(Metric_Unit, id=metric_primary_key)
     if request.method == 'POST':
         form = MetricUnitForm(request.POST, instance=metric)
