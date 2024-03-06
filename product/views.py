@@ -144,13 +144,13 @@ def view_category(request):
     })
 
 @login_required
-def add_category(request):
+def create_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product category has been added.')
-            return redirect('product:category')
+            return redirect('product:view_category')
     else:
         form = CategoryForm()
     return render(request, 'product/form.html', {
@@ -166,7 +166,7 @@ def edit_category(request, category_primary_key):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product category has been edited.')
-            return redirect('product:category')
+            return redirect('product:view_category')
     else:
         form = CategoryForm(instance=category)
     
@@ -184,7 +184,7 @@ def delete_category(request, category_primary_key):
         form = CategoryForm(request.POST, instance=category)
         category.delete()
         messages.success(request, 'Successful! Product category has been deleted.')
-        return redirect('product:category')
+        return redirect('product:view_category')
     else:
         form = CategoryForm(instance=category)
     return render(request ,'product/form.html', {
