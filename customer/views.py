@@ -25,7 +25,7 @@ def create_customer(request):
 
         if form.is_valid():
             form.save()
-            messages.success('Successful! Customer details has been created.')
+            messages.success(request, 'Successful! Customer details has been created.')
             return redirect('customer:view_customer')
     else:
         form = CustomerForm()
@@ -41,7 +41,7 @@ def update_customer(request, customer_primary_key):
         form = CustomerForm(request.POST, instance=customer)
         if form.is_valid():
             form.save()
-            messages.success('Successful! Customer details has been edited.')
+            messages.success(request, 'Successful! Customer details has been edited.')
             return redirect('customer:view_customer')
     else:
         form = CustomerForm(instance=customer)
@@ -57,7 +57,7 @@ def delete_customer(request, customer_primary_key):
     if request.method == 'POST':
         form = CustomerForm(request.POST, instance=customer)
         customer.delete()
-        messages.success('Successful! Customer details has been deleted.')
+        messages.success(request, 'Successful! Customer details has been deleted.')
         return redirect('customer:view_customer')
     else:
         form = CustomerForm(instance=customer)
