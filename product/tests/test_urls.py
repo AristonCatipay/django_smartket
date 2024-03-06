@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from customer.models import Customer
 from product.models import Product, Color, Category, Size, Metric_Unit
-from product.views import index, create_product, edit_product, delete_product, metric, add_metric, edit_metric, delete_metric, category, add_category, edit_category, delete_category, color, add_color, edit_color, delete_color, size, add_size, edit_size, delete_size
+from product.views import index, create_product, update_product, delete_product, view_metric, create_metric, update_metric, delete_metric, category, create_category, update_category, delete_category, view_color, create_color, update_color, delete_color, view_size, create_size, update_size, delete_size
 
 class TestUrls(TestCase):
     @classmethod
@@ -74,7 +74,7 @@ class TestUrls(TestCase):
     def test_edit_product_url(self):
         product = self.create_test_product()
         url = reverse('product:edit_product', args=[product.pk])
-        self.assertEquals(resolve(url).func, edit_product)
+        self.assertEquals(resolve(url).func, update_product)
 
     def test_delete_product_url(self):
         product = self.create_test_product()
@@ -83,16 +83,16 @@ class TestUrls(TestCase):
     
     def test_metric_url(self):
         url = reverse('product:metric')
-        self.assertEqual(resolve(url).func, metric)
+        self.assertEqual(resolve(url).func, view_metric)
     
     def test_add_metric_url(self):
         url = reverse('product:add_metric')
-        self.assertEquals(resolve(url).func, add_metric)
+        self.assertEquals(resolve(url).func, create_metric)
 
     def test_edit_metric_url(self):
         metric = self.create_test_metric_unit()
         url = reverse('product:edit_metric', args=[metric.pk])
-        self.assertEquals(resolve(url).func, edit_metric)
+        self.assertEquals(resolve(url).func, update_metric)
 
     def test_delete_metric_url(self):
         metric = self.create_test_metric_unit()
@@ -105,12 +105,12 @@ class TestUrls(TestCase):
 
     def test_add_category_url(self):
         url = reverse('product:add_category')
-        self.assertEquals(resolve(url).func, add_category)
+        self.assertEquals(resolve(url).func, create_category)
     
     def test_edit_category_url(self):
         category = self.create_test_category()
         url = reverse('product:edit_category', args=[category.pk])
-        self.assertEquals(resolve(url).func, edit_category)
+        self.assertEquals(resolve(url).func, update_category)
     
     def test_delete_category_url(self):
         category = self.create_test_category()
@@ -119,16 +119,16 @@ class TestUrls(TestCase):
 
     def test_color_url(self):
         url = reverse('product:color')
-        self.assertEqual(resolve(url).func, color)
+        self.assertEqual(resolve(url).func, view_color)
 
     def test_add_color_url(self):
         url = reverse('product:add_color')
-        self.assertEquals(resolve(url).func, add_color)
+        self.assertEquals(resolve(url).func, create_color)
     
     def test_edit_color_url(self):
         color = self.create_test_color()
         url = reverse('product:edit_color', args=[color.pk])
-        self.assertEquals(resolve(url).func, edit_color)
+        self.assertEquals(resolve(url).func, update_color)
 
     def test_delete_color_url(self):
         color = self.create_test_color()
@@ -137,16 +137,16 @@ class TestUrls(TestCase):
 
     def test_size_url(self):
         url = reverse('product:size')
-        self.assertEqual(resolve(url).func, size)
+        self.assertEqual(resolve(url).func, view_size)
     
     def test_add_size_url(self):
         url = reverse('product:add_size')
-        self.assertEquals(resolve(url).func, add_size)
+        self.assertEquals(resolve(url).func, create_size)
 
     def test_edit_size_url(self):
         size = self.create_test_size()
         url = reverse('product:edit_size', args=[size.pk])
-        self.assertEquals(resolve(url).func, edit_size)
+        self.assertEquals(resolve(url).func, update_size)
 
     def test_delete_size_url(self):
         size = self.create_test_size()

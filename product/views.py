@@ -42,7 +42,7 @@ def create_product(request):
     })
 
 @login_required
-def edit_product(request, product_primary_key):
+def update_product(request, product_primary_key):
     product = get_object_or_404(Product, id=product_primary_key)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
@@ -77,21 +77,21 @@ def delete_product(request, product_primary_key):
     })
 
 @login_required
-def metric(request):
+def view_metric(request):
     metric_units = Metric_Unit.objects.all()
-    return render(request, 'product/metric_unit.html', {
+    return render(request, 'product/view_metric.html', {
         'title': 'Metric',
         'metric_units': metric_units,
     })
 
 @login_required
-def add_metric(request):
+def create_metric(request):
     if request.method == 'POST':
         form = MetricUnitForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product metric has been added.')
-            return redirect('product:metric')
+            return redirect('product:view_metric')
     else:
         form = MetricUnitForm()
     return render(request, 'product/form.html', {
@@ -100,14 +100,14 @@ def add_metric(request):
     })
 
 @login_required
-def edit_metric(request, metric_primary_key):
+def update_metric(request, metric_primary_key):
     metric = get_object_or_404(Metric_Unit, id=metric_primary_key)
     if request.method == 'POST':
         form = MetricUnitForm(request.POST, instance=metric)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product metric has been edited.')
-            return redirect('product:metric')
+            return redirect('product:view_metric')
     else:
         form = MetricUnitForm(instance=metric)
     
@@ -125,7 +125,7 @@ def delete_metric(request, metric_primary_key):
         form = MetricUnitForm(request.POST, instance=metric)
         metric.delete()
         messages.success(request, 'Successful! Product metric has been deleted.')
-        return redirect('product:metric')
+        return redirect('product:view_metric')
     else:
         form = MetricUnitForm(instance=metric)
     return render(request ,'product/form.html', {
@@ -136,21 +136,21 @@ def delete_metric(request, metric_primary_key):
     })
 
 @login_required
-def category(request):
+def view_category(request):
     categories = Category.objects.all()
-    return render(request, 'product/category.html', {
+    return render(request, 'product/view_category.html', {
         'title': 'Category',
         'categories': categories,
     })
 
 @login_required
-def add_category(request):
+def create_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product category has been added.')
-            return redirect('product:category')
+            return redirect('product:view_category')
     else:
         form = CategoryForm()
     return render(request, 'product/form.html', {
@@ -159,14 +159,14 @@ def add_category(request):
     })
 
 @login_required
-def edit_category(request, category_primary_key):
+def update_category(request, category_primary_key):
     category = get_object_or_404(Category, id=category_primary_key)
     if request.method == 'POST':
         form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product category has been edited.')
-            return redirect('product:category')
+            return redirect('product:view_category')
     else:
         form = CategoryForm(instance=category)
     
@@ -184,7 +184,7 @@ def delete_category(request, category_primary_key):
         form = CategoryForm(request.POST, instance=category)
         category.delete()
         messages.success(request, 'Successful! Product category has been deleted.')
-        return redirect('product:category')
+        return redirect('product:view_category')
     else:
         form = CategoryForm(instance=category)
     return render(request ,'product/form.html', {
@@ -195,21 +195,21 @@ def delete_category(request, category_primary_key):
     })
 
 @login_required
-def color(request):
+def view_color(request):
     colors = Color.objects.all()
-    return render(request, 'product/color.html', {
+    return render(request, 'product/view_color.html', {
         'title': 'Colors',
         'colors': colors,
     })
 
 @login_required
-def add_color(request):
+def create_color(request):
     if request.method == 'POST':
         form = ColorForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product color has been added.')
-            return redirect('product:color')
+            return redirect('product:view_color')
     else:
         form = ColorForm()
     return render(request, 'product/form.html', {
@@ -218,14 +218,14 @@ def add_color(request):
     })
 
 @login_required
-def edit_color(request, color_primary_key):
+def update_color(request, color_primary_key):
     color = get_object_or_404(Color, id=color_primary_key)
     if request.method == 'POST':
         form = ColorForm(request.POST, instance=color)
         if form.is_valid():
-            form.save()
+            form.save() 
             messages.success(request, 'Successful! Product color has been edited.')
-            return redirect('product:color')
+            return redirect('product:view_color')
     else:
         form = ColorForm(instance=color)
     
@@ -243,7 +243,7 @@ def delete_color(request, color_primary_key):
         form = ColorForm(request.POST, instance=color)
         color.delete()
         messages.success(request, 'Successful! Product color has been deleted.')
-        return redirect('product:color')
+        return redirect('product:view_color')
     else:
         form = ColorForm(instance=color)
     return render(request ,'product/form.html', {
@@ -254,21 +254,21 @@ def delete_color(request, color_primary_key):
     })
 
 @login_required
-def size(request):
+def view_size(request):
     sizes = Size.objects.all()
-    return render(request, 'product/size.html', {
+    return render(request, 'product/view_size.html', {
         'title': 'Sizes',
         'sizes': sizes,
     })
 
 @login_required
-def add_size(request):
+def create_size(request):
     if request.method == 'POST':
         form = SizeForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product size has been added.')
-            return redirect('product:size')
+            return redirect('product:view_size')
     else:
         form = SizeForm()
     return render(request, 'product/form.html', {
@@ -277,14 +277,14 @@ def add_size(request):
     })
 
 @login_required
-def edit_size(request, size_primary_key):
+def update_size(request, size_primary_key):
     size = get_object_or_404(Size, id=size_primary_key)
     if request.method == 'POST':
         form = SizeForm(request.POST, instance=size)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successful! Product size has been edited.')
-            return redirect('product:size')
+            return redirect('product:view_size')
     else:
         form = SizeForm(instance=size)
     
@@ -302,7 +302,7 @@ def delete_size(request, size_primary_key):
         form = SizeForm(request.POST, instance=size)
         size.delete()
         messages.success(request, 'Successful! Product size has been deleted.')
-        return redirect('product:size')
+        return redirect('product:view_size')
     else:
         form = SizeForm(instance=size)
     return render(request ,'product/form.html', {
