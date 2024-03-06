@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from customer.models import Customer
 from product.models import Product, Color, Category, Size, Metric_Unit
-from product.views import index, create_product, update_product, delete_product, view_metric, create_metric, update_metric, delete_metric, category, create_category, edit_category, delete_category, color, add_color, edit_color, delete_color, size, add_size, edit_size, delete_size
+from product.views import index, create_product, update_product, delete_product, view_metric, create_metric, update_metric, delete_metric, category, create_category, update_category, delete_category, color, add_color, edit_color, delete_color, size, add_size, edit_size, delete_size
 
 class TestUrls(TestCase):
     @classmethod
@@ -110,7 +110,7 @@ class TestUrls(TestCase):
     def test_edit_category_url(self):
         category = self.create_test_category()
         url = reverse('product:edit_category', args=[category.pk])
-        self.assertEquals(resolve(url).func, edit_category)
+        self.assertEquals(resolve(url).func, update_category)
     
     def test_delete_category_url(self):
         category = self.create_test_category()

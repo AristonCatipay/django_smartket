@@ -159,7 +159,7 @@ def create_category(request):
     })
 
 @login_required
-def edit_category(request, category_primary_key):
+def update_category(request, category_primary_key):
     category = get_object_or_404(Category, id=category_primary_key)
     if request.method == 'POST':
         form = CategoryForm(request.POST, instance=category)
