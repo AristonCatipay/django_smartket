@@ -9,6 +9,27 @@ class Metric_Unit(models.Model):
     def __str__(self):
         return self.name
     
+# Predefined metric units
+PREDEFINED_UNITS = [
+    "Grams",
+    "Kilograms",
+    "Milliliters",
+    "Liters",
+    "Pieces",
+    "Pair",
+    "Pack",
+    "Dozens",
+    "Not Specified"
+]
+
+@receiver(post_migrate)
+def check_metric_units(sender, **kwargs):
+    # Check if Metric_Unit table is empty
+    if Metric_Unit.objects.count() == 0:
+        # If empty, populate with predefined metric units
+        for unit_name in PREDEFINED_UNITS:
+            Metric_Unit.objects.create(name=unit_name)
+    
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
@@ -90,16 +111,6 @@ class Size(models.Model):
     # Showing the actual name of the field.
     def __str__(self):
         return self.name
-    
-    # Different Sizes
-    # Extra Small
-    # Small
-    # Medium
-    # Large
-    # Extra Large
-    # Double XL
-    # Triple XL
-    # Not Specified
 
 # Predefined sizes
 PREDEFINED_SIZES = [
