@@ -17,38 +17,20 @@ git clone https://github.com/AristonCatipay/django_smartket.git
 
 ### Install Dependencies
 
-Activate virtual environment
+Install Pipenv
+```bash
+pip install pipenv
+```
+
+Activate Virtual Environment
 ```bash
 pipenv shell
 ```
 
-Install Django
+Install Dependencies
 ```bash
-pipenv install django
+pipenv install
 ```
-
-Install MySQL Client
-```bash
-pipenv install mysqlclient
-```
-
-Install Tailwind
-```bash
-pipenv install django-tailwind
-```
-
-Install Django Tailwind Reload
-```bash
-pipenv install django-tailwind[reload]
-```
-
-Create a database named 'django_smartket' 
-using your RDMS of choice (in this case using XAMPP Server).
-
-![Create_a_database](/readme_images/xampp_create_database.png)
-
-Edit your database configuration in the settings.py.
-![Database_Configuration](/readme_images/change_database_settings.png)
 
 Migrate
 ```bash
