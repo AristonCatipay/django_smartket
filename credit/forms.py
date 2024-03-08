@@ -17,7 +17,7 @@ class CreditTransactionForm(forms.ModelForm):
         fields = ['customer', 'due_date']
         widgets = {
             'customer': forms.Select(attrs={
-                'class': INPUT_CLASSES,
+                'class': SELECT_AREA,
             }),
             'due_date': forms.SelectDateWidget(years=range(today.year, 2999), attrs={
                 'class': SELECT_AREA,

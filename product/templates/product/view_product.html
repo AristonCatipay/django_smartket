@@ -54,7 +54,7 @@
                         </svg>
                         Unit
                     </a>
-                    <a href="{% url 'product:add_size' %}"
+                    <a href="{% url 'product:create_size' %}"
                         class="flex items-center justify-center font-medium rounded-lg text-sm px-2 py-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                         <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -63,7 +63,7 @@
                         </svg>
                         Size
                     </a>
-                    <a href="{% url 'product:add_color' %}"
+                    <a href="{% url 'product:create_color' %}"
                         class="flex items-center justify-center font-medium rounded-lg text-sm px-2 py-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                         <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -72,7 +72,7 @@
                         </svg>
                         Color
                     </a>
-                    <a href="{% url 'product:add_category' %}"
+                    <a href="{% url 'product:create_category' %}"
                         class="flex items-center justify-center font-medium rounded-lg text-sm px-2 py-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                         <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -106,15 +106,17 @@
                                 <li>
                                     <a href="{% url 'product:view_product' %}?query={{ query }}&category={{ category.id }}"
                                         type="button"
-                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{
-                                        category.name }}</a>
+                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        {{ category.name }}
+                                    </a>
                                 </li>
                                 {% endfor %}
                                 {% else %}
                                 <li>
                                     <p
                                         class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        Empty Category</p>
+                                        Empty Category
+                                    </p>
                                 </li>
                                 {% endif %}
                             </ul>
