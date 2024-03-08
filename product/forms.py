@@ -14,25 +14,28 @@ class ProductForm(forms.ModelForm):
                   'product_color', 'product_category', 'product_size')
         widgets = {
             'product_name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': 'Argentina Corn Beef'
             }),
             'product_price': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': '38'
             }),
             'metric_number': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': '175'
             }),
             'metric_unit': forms.Select(attrs={
-                'class': SELECT_AREA
+                'class': SELECT_AREA,
             }),
             'product_color': forms.Select(attrs={
-                'class': SELECT_AREA
+                'class': SELECT_AREA,
             }),
             'product_category': forms.Select(attrs={
-                'class': SELECT_AREA
+                'class': SELECT_AREA,
             }),
             'product_size': forms.Select(attrs={
-                'class': SELECT_AREA
+                'class': SELECT_AREA,
             }),
         }
 
@@ -42,7 +45,8 @@ class MetricUnitForm(forms.ModelForm):
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES, 
+                'placeholder': 'Grams'
             }),
         }
     
@@ -52,7 +56,8 @@ class CategoryForm(forms.ModelForm):
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES,
+                'placeholder': 'Can Goods'
             }),
         }
 
@@ -62,7 +67,8 @@ class ColorForm(forms.ModelForm):
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES, 
+                'placeholder': 'Gray'
             }),
         }
 
@@ -72,6 +78,7 @@ class SizeForm(forms.ModelForm):
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES
+                'class': INPUT_CLASSES, 
+                'placeholder': 'Extra Large'
             }),
         }
