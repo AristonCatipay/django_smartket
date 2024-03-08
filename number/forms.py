@@ -13,15 +13,17 @@ class CustomerNumberForm(forms.ModelForm):
         fields = ('customer', 'number', 'network', 'load')
         widgets = {
             'customer': forms.Select(attrs={
-                'class': INPUT_CLASSES,
+                'class': SELECT_AREA,
             }),
             'number': forms.TextInput(attrs={
                 'class': INPUT_CLASSES,
+                'placeholder': '093216789',
             }),
             'network': forms.Select(attrs={
                 'class': SELECT_AREA,
             }),
             'load': forms.TextInput(attrs={
                 'class': INPUT_CLASSES,
+                'placeholder': 'Regular 20',
             })
         }
