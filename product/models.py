@@ -22,7 +22,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-# Predefined categories
 PREDEFINED_CATEGORIES = [
     "Can Goods",
     "Sauces",
@@ -59,20 +58,6 @@ class Color(models.Model):
     def __str__(self):
         return self.name
     
-    # Different Color
-    # Red
-    # Orange
-    # Yellow
-    # Green
-    # Blue
-    # Violet
-    # Pink
-    # White
-    # Grey
-    # Black
-    # Not Specified
-
-# Predefined colors
 PREDEFINED_COLORS = [
     "Red",
     "Orange",
@@ -116,6 +101,25 @@ class Size(models.Model):
     # Triple XL
     # Not Specified
 
+# Predefined sizes
+PREDEFINED_SIZES = [
+    "Extra Small",
+    "Small",
+    "Medium",
+    "Large",
+    "Extra Large",
+    "Double XL",
+    "Triple XL",
+    "Not Specified"
+]
+
+@receiver(post_migrate)
+def check_sizes(sender, **kwargs):
+    # Check if Size table is empty
+    if Size.objects.count() == 0:
+        # If empty, populate with predefined sizes
+        for size_name in PREDEFINED_SIZES:
+            Size.objects.create(name=size_name)
 
 class Product(models.Model):
     product_name = models.CharField(max_length=255)
