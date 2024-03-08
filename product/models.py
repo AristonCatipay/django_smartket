@@ -72,6 +72,29 @@ class Color(models.Model):
     # Black
     # Not Specified
 
+# Predefined colors
+PREDEFINED_COLORS = [
+    "Red",
+    "Orange",
+    "Yellow",
+    "Green",
+    "Blue",
+    "Violet",
+    "Pink",
+    "White",
+    "Grey",
+    "Black",
+    "Not Specified"
+]
+
+@receiver(post_migrate)
+def check_colors(sender, **kwargs):
+    # Check if Color table is empty
+    if Color.objects.count() == 0:
+        # If empty, populate with predefined colors
+        for color_name in PREDEFINED_COLORS:
+            Color.objects.create(name=color_name)
+
 class Size(models.Model):
     name = models.CharField(max_length=255)
 
